@@ -23,8 +23,8 @@ export default function RenderSelectLanguageButton({ item }) {
     >
       <Image source={item.image} style={styles.image} />
       <View style={styles.textContainer}>
-        <Text variant="titleMedium">{item.label}</Text>
-        <Text variant="titleSmall">{item.description}</Text>
+        <Text variant="titleLarge">{item.label}</Text>
+        <Text variant="titleMedium">{item.description}</Text>
       </View>
     </Button>
   );
@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
     borderColor: "black",
   },
   image: {
-    width: 50,
-    height: 50,
+    width: 60,
+    height: 60,
     marginRight: 20,
     borderRadius: 1000,
   },
