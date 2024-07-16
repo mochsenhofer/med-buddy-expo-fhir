@@ -1,18 +1,25 @@
-import React from "react";
+import React, { useRef } from "react";
 import renderQuestionItem from "../utils/renderFunctions/renderQuestionItem";
 import BasicScreenLayout from "../components/common/BasicScreenLayout";
 import { previewScreenRoute } from "../navigation/MedBuddyStackNavigation";
 import {
   updateGivenName,
   updateFamilyName,
-  updateDateOfBirth,
+  updateBirthDate,
   updateInsuranceNumber,
   updateGender,
 } from "../store/patientReducer";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function RegistrationScreen() {
+  const registeredPatient = useSelector((state) => state.patient);
+  const language = registeredPatient.communication[0].language.coding[0].code;
   const dispatch = useDispatch();
+  const givenNameRef = useRef();
+  const familyNameRef = useRef();
+  const birthDateRef = useRef();
+  const insuranceNumberRef = useRef();
+
   const patientInputArray = [
     {
       title: "Registration Screen",
@@ -29,6 +36,10 @@ export default function RegistrationScreen() {
             dispatch(updateGivenName(text));
           },
           autofocus: true,
+          ref: givenNameRef,
+          onSubmit: () => {
+            familyNameRef.current.focus();
+          },
         },
         {
           question: "Last Name",
@@ -37,14 +48,7 @@ export default function RegistrationScreen() {
           onChangeText: (text) => {
             dispatch(updateFamilyName(text));
           },
-        },
-        {
-          question: "Date of birth",
-          placeholder: "What is your date of birth?",
-          type: "string",
-          onChangeText: (text) => {
-            dispatch(updateDateOfBirth(text));
-          },
+          ref: familyNameRef,
         },
         {
           question: "Insurance number",
@@ -55,6 +59,16 @@ export default function RegistrationScreen() {
           },
           maxLength: 10,
           keyboardType: "numeric",
+          ref: insuranceNumberRef,
+        },
+        {
+          question: "Date of birth",
+          placeholder: "What is your date of birth?",
+          type: "date",
+          onChangeText: (d) => {
+            dispatch(updateBirthDate(d));
+          },
+          ref: birthDateRef,
         },
         {
           question: "What is your gender?",
@@ -68,6 +82,7 @@ export default function RegistrationScreen() {
       sections={patientInputArray}
       renderItem={renderQuestionItem}
       navigateTo={previewScreenRoute}
+      title={registeredPatient.name[0].given[0]}
     />
   );
 }
