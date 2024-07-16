@@ -1,12 +1,8 @@
 import React from "react";
 import CenteredScreenLayout from "../components/common/CenteredScreenLayout";
 import renderSelectLanguageButton from "../utils/renderFunctions/renderSelectLanguageButton";
-import { Button } from "react-native-paper";
-import { useNavigation } from "@react-navigation/native";
-import { registrationScreenRoute } from "../navigation/MedBuddyStackNavigation";
 
 export default function SelectLanguageScreen() {
-  const navigation = useNavigation();
   const languageButtonProps = [
     {
       title: null,
