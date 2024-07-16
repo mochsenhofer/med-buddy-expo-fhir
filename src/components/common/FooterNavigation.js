@@ -7,6 +7,7 @@ export default function FooterNavigation({
   nextButtonPressed,
   backButtonPressed,
   navigateTo,
+  page,
 }) {
   const navigation = useNavigation();
   const handleNextButtonPress = () => {
@@ -38,7 +39,7 @@ export default function FooterNavigation({
         Back
       </Button>
       <Text variant="titleSmall" style={styles.page}>
-        1
+        {page}
       </Text>
       <Button
         icon="chevron-right"

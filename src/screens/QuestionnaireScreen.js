@@ -1,14 +1,21 @@
 import React from "react";
-import Header from "../components/common/Header";
-import Section from "../components/common/Section";
-import Footer from "../components/common/Footer";
+import renderSectionListItem from "../utils/renderFunctions/renderSectionListItem";
+import BasicScreenLayout from "../components/common/BasicScreenLayout";
+import { overviewScreenRoute } from "../navigation/MedBuddyStackNavigation";
 
 export default function QuestionnaireScreen() {
+  const testData = [
+    {
+      title: "Main dishes",
+      data: ["Pizza", "Burger", "Risotto"],
+    },
+  ];
   return (
-    <>
-      <Header />
-      <Section />
-      <Footer />
-    </>
+    <BasicScreenLayout
+      title={"QuestionnaireScreen"}
+      sections={testData}
+      renderItem={renderSectionListItem}
+      navigateTo={overviewScreenRoute}
+    />
   );
 }

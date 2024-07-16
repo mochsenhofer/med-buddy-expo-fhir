@@ -1,14 +1,21 @@
 import React from "react";
-import Header from "../components/common/Header";
-import Section from "../components/common/Section";
-import Footer from "../components/common/Footer";
+import renderSectionListItem from "../utils/renderFunctions/renderSectionListItem";
+import BasicScreenLayout from "../components/common/BasicScreenLayout";
+import { startScreenRoute } from "../navigation/MedBuddyStackNavigation";
 
 export default function FaqScreen() {
+  const testData = [
+    {
+      title: "Main dishes",
+      data: ["Pizza", "Burger", "Risotto"],
+    },
+  ];
   return (
-    <>
-      <Header />
-      <Section />
-      <Footer />
-    </>
+    <BasicScreenLayout
+      title={"StartScreen"}
+      sections={testData}
+      renderItem={renderSectionListItem}
+      navigateTo={startScreenRoute}
+    />
   );
 }
