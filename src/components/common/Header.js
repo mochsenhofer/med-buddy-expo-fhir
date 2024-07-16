@@ -1,8 +1,9 @@
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { Text } from "react-native-paper";
 import { useTheme } from "react-native-paper";
 
-export default function Header() {
+export default function Header({ title }) {
   const theme = useTheme();
   return (
     <View
@@ -11,20 +12,18 @@ export default function Header() {
         styles.headerContainer,
       ]}
     >
-      <Text style={styles.headerText}>Header</Text>
+      <Text variant="headlineSmall" style={styles.headerText}>
+        {title}
+      </Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   headerContainer: {
-    flex: 2,
+    flex: 1.25,
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
-  },
-  headerText: {
-    color: "white",
-    textAlign: "center",
   },
 });

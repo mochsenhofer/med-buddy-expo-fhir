@@ -16,6 +16,7 @@ const theme = {
     tertiary: medBuddyBlue,
     background: backgroundWhite,
     text: black,
+    outline: darkBlue,
   },
 };
 

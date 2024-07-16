@@ -2,7 +2,7 @@ import React from "react";
 import { KeyboardAvoidingView, SectionList, StyleSheet } from "react-native";
 import renderSectionHeader from "../../utils/renderFunctions/renderSectionHeader";
 
-export default function Section({ sections, renderItem }) {
+export default function CenterdSection({ sections, renderItem }) {
   return (
     <KeyboardAvoidingView style={styles.sectionContainer} behavior="padding">
       <SectionList
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   sectionContainer: {
     flex: 4,
     justifyContent: "center",
-    alignItems: "flex-start",
+    alignItems: "center",
     width: "75%",
     backgroundColor: "yellow",
   },
