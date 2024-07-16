@@ -22,7 +22,7 @@ export default function RegistrationScreen() {
 
   const patientInputArray = [
     {
-      title: "Registration Screen",
+      title: "Welcome!",
       data: [
         {
           question: "Please answer the following questions: ",
@@ -40,6 +40,7 @@ export default function RegistrationScreen() {
           onSubmit: () => {
             familyNameRef.current.focus();
           },
+          value: registeredPatient.name[0].given[0],
         },
         {
           question: "Last Name",
@@ -49,6 +50,9 @@ export default function RegistrationScreen() {
             dispatch(updateFamilyName(text));
           },
           ref: familyNameRef,
+          onSubmit: () => {
+            insuranceNumberRef.current.focus();
+          },
         },
         {
           question: "Insurance number",
