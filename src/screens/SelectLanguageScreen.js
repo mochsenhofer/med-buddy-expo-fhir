@@ -42,7 +42,6 @@ export default function SelectLanguageScreen() {
   return (
     <>
       <CenteredScreenLayout
-        title={"Select Language"}
         sections={languageButtonProps}
         renderItem={renderSelectLanguageButton}
         numColumns={3}
