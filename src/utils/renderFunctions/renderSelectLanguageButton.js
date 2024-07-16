@@ -4,9 +4,9 @@ import { Button, Text } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { registrationScreenRoute } from "../../navigation/MedBuddyStackNavigation";
 
-export default function RenderSelectLanguageButton({ item }) {
+export default function renderSelectLanguageButton({ item }) {
   const navigation = useNavigation();
-  chosenLanguage = item.key;
+  const chosenLanguage = item.key;
 
   function handleSelectedLanguageButtonPressed() {
     console.log(chosenLanguage);
@@ -37,6 +37,8 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     borderWidth: 2,
     borderColor: "black",
+    width: "40%",
+    padding: 10,
   },
   image: {
     width: 60,
