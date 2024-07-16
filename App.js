@@ -5,6 +5,7 @@ import theme from "./src/theme/theme";
 
 export default function App() {
   return (
+    // add store here
     <PaperProvider theme={theme}>
       <MedBuddyStackNavigation />
     </PaperProvider>
