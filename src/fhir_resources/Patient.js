@@ -21,7 +21,7 @@ export const Patient = {
   name: [
     {
       family: "",
-      given: [""],
+      given: ["Herbert"],
     },
   ],
   communication: [
