@@ -4,11 +4,20 @@ import Header from "./Header";
 import CenteredSection from "./CenteredSection";
 import Footer from "./Footer";
 
-export default function CenteredScreenLayout({ title, sections, renderItem }) {
+export default function CenteredScreenLayout({
+  title,
+  sections,
+  renderItem,
+  numColumns,
+}) {
   return (
     <View style={styles.container}>
       <Header title={title} />
-      <CenteredSection sections={sections} renderItem={renderItem} />
+      <CenteredSection
+        sections={sections}
+        renderItem={renderItem}
+        numColumns={numColumns}
+      />
       <Footer />
     </View>
   );

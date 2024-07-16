@@ -2,7 +2,7 @@ import React from "react";
 import { KeyboardAvoidingView, SectionList, StyleSheet } from "react-native";
 import renderSectionHeader from "../../utils/renderFunctions/renderSectionHeader";
 
-export default function CenterdSection({ sections, renderItem }) {
+export default function CenterdSection({ sections, renderItem, numColumns }) {
   return (
     <KeyboardAvoidingView style={styles.sectionContainer} behavior="padding">
       <SectionList
@@ -12,6 +12,7 @@ export default function CenterdSection({ sections, renderItem }) {
         renderSectionHeader={renderSectionHeader}
         stickySectionHeadersEnabled={false}
         scrollEnabled={false}
+        numColumns={numColumns}
       />
     </KeyboardAvoidingView>
   );
