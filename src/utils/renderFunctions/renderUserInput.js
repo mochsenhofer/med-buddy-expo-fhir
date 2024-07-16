@@ -43,6 +43,7 @@ export default function renderUserInput({ item }) {
           keyboardType={item.keyboardType}
           onSubmitEditing={item.onSubmit}
           iconColor={theme.colors.primary}
+          value={item.value}
         />
       );
     case "date":
