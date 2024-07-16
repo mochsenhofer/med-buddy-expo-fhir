@@ -37,8 +37,9 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     borderWidth: 2,
     borderColor: "black",
-    width: "40%",
-    padding: 10,
+    width: "50%",
+    minHeight: 120,
+    padding: 20,
   },
   image: {
     width: 60,
