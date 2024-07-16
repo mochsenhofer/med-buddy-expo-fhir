@@ -1,12 +1,8 @@
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 export default function Footer() {
-  return (
-    <View style={styles.footerContainer}>
-      <Text style={styles.footerText}>Footer</Text>
-    </View>
-  );
+  return <View style={styles.footerContainer}></View>;
 }
 
 const styles = StyleSheet.create({
