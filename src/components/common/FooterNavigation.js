@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Text, Button, useTheme } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
+import { edgeComponentMargins } from "../../theme/constants";
 
 export default function FooterNavigation({
   nextButtonPressed,
@@ -53,7 +54,6 @@ export default function FooterNavigation({
     </View>
   );
 }
-const edgeComponentMargins = 15;
 
 const styles = StyleSheet.create({
   footerContainer: {
@@ -67,10 +67,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
     flexDirection: "reverse-row",
     fontSize: 20,
+    textTransform: "uppercase",
   },
   navigationButton: {
     minWidth: 200,
-    minHeight: 60,
+    minHeight: 80,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 1000,
