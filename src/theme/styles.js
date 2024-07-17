@@ -15,8 +15,6 @@ export const userInputStyles = StyleSheet.create({
 export const sectionListStyles = StyleSheet.create({
   sectionContainer: {
     flex: 4,
-    justifyContent: "center",
-    alignItems: "flex-start",
     width: "70%",
   },
   sectionList: {
