@@ -6,7 +6,10 @@ import { sectionListStyles } from "../../theme/styles";
 export default function CenteredSection({ sections, renderItem, numColumns }) {
   return (
     <KeyboardAvoidingView
-      style={sectionListStyles.sectionContainer}
+      style={[
+        sectionListStyles.sectionContainer,
+        { justifyContent: "center", alignItems: "center" },
+      ]}
       behavior="padding"
     >
       <SectionList
