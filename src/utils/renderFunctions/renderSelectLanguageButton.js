@@ -3,14 +3,31 @@ import { Image, StyleSheet, View } from "react-native";
 import { Button, Text } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { registrationScreenRoute } from "../../navigation/MedBuddyStackNavigation";
+import { useDispatch } from "react-redux";
+import { updateLanguage } from "../../store/patientReducer";
+import { en, de, pl, registerTranslation } from "react-native-paper-dates";
 
 export default function renderSelectLanguageButton({ item }) {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
   const chosenLanguage = item.key;
 
   function handleSelectedLanguageButtonPressed() {
     console.log(chosenLanguage);
-    // add reducer to store chosen language
+    dispatch(updateLanguage(chosenLanguage));
+    switch (chosenLanguage) {
+      case "de":
+        registerTranslation("de", de);
+        break;
+      case "en":
+        registerTranslation("en", en);
+        break;
+      case "pl":
+        registerTranslation("pl", pl);
+        break;
+    }
+
     navigation.navigate(registrationScreenRoute);
   }
 
