@@ -53,6 +53,7 @@ export default function RegistrationScreen() {
           onSubmit: () => {
             insuranceNumberRef.current.focus();
           },
+          value: registeredPatient.name[0].family,
         },
         {
           question: "Insurance number",
@@ -64,6 +65,7 @@ export default function RegistrationScreen() {
           maxLength: 10,
           keyboardType: "numeric",
           ref: insuranceNumberRef,
+          value: registeredPatient.identifier[0].value,
         },
         {
           question: "Date of birth",
@@ -73,6 +75,8 @@ export default function RegistrationScreen() {
             dispatch(updateBirthDate(d));
           },
           ref: birthDateRef,
+          locale: language,
+          value: registeredPatient.birthDate,
         },
         {
           question: "What is your gender?",
@@ -86,7 +90,7 @@ export default function RegistrationScreen() {
       sections={patientInputArray}
       renderItem={renderQuestionItem}
       navigateTo={previewScreenRoute}
-      title={registeredPatient.name[0].given[0]}
+      title={registeredPatient.birthDate}
     />
   );
 }
