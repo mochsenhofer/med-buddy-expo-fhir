@@ -6,6 +6,7 @@ import { DatePickerInput } from "react-native-paper-dates";
 
 export default function renderUserInput({ item }) {
   const [inputDate, setInputDate] = useState(null);
+  const [inputDate, setInputDate] = useState(item.value);
   const theme = useTheme();
   switch (item.type) {
     case "display":
