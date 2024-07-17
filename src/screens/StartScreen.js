@@ -1,21 +1,32 @@
 import React from "react";
-import renderSectionListItem from "../utils/renderFunctions/renderSectionListItem";
-import BasicScreenLayout from "../components/common/BasicScreenLayout";
+import { TouchableOpacity, Image } from "react-native";
 import { selectLanguageScreenRoute } from "../navigation/MedBuddyStackNavigation";
+import { useNavigation } from "@react-navigation/native";
+import { StyleSheet } from "react-native";
 
 export default function StartScreen() {
-  const testData = [
-    {
-      title: "Main dishes",
-      data: ["Pizza", "Burger", "Risotto"],
-    },
-  ];
+  const navigation = useNavigation();
   return (
-    <BasicScreenLayout
-      title={"StartScreen"}
-      sections={testData}
-      renderItem={renderSectionListItem}
-      navigateTo={selectLanguageScreenRoute}
-    />
+    <TouchableOpacity
+      onPress={() => navigation.navigate(selectLanguageScreenRoute)}
+      style={styles.startScreen}
+    >
+      <Image
+        source={require("../assets/images/home-logo.png")}
+        style={styles.image}
+      />
+    </TouchableOpacity>
   );
 }
+
+const styles = StyleSheet.create({
+  startScreen: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  image: {
+    resizeMode: "contain",
+    width: "75%",
+  },
+});
