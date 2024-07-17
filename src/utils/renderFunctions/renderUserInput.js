@@ -5,6 +5,7 @@ import { View } from "react-native";
 import { DatePickerInput } from "react-native-paper-dates";
 
 export default function renderUserInput({ item }) {
+  console.log("item", item.type);
   const [inputDate, setInputDate] = useState(item.value);
   const theme = useTheme();
   switch (item.type) {
@@ -27,7 +28,7 @@ export default function renderUserInput({ item }) {
         />
       );
     case "choice":
-      return <Text variant="titleSmall">Choice</Text>;
+      return <Text>RadioButtons</Text>;
     case "string":
       return (
         <TextInput

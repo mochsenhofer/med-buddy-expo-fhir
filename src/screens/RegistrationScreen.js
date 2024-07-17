@@ -79,7 +79,7 @@ export default function RegistrationScreen() {
           value: registeredPatient.birthDate,
         },
         {
-          question: "What is your gender?",
+          question: "Choice",
           type: "choice",
         },
       ],
