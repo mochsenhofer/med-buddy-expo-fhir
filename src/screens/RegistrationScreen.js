@@ -71,7 +71,7 @@ export default function RegistrationScreen() {
           question: "Date of birth",
           placeholder: "What is your date of birth?",
           type: "date",
-          onChangeText: (d) => {
+          onChange: (d) => {
             dispatch(updateBirthDate(d));
           },
           ref: birthDateRef,
