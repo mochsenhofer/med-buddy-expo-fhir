@@ -2,7 +2,7 @@ export const Patient = {
   resourceType: "Patient",
   id: "",
   gender: "",
-  birthDate: "",
+  birthDate: "1975-10-15",
   identifier: [
     {
       use: "usual",
