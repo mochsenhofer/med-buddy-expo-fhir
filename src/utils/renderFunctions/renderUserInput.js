@@ -6,8 +6,18 @@ import { DatePickerInput } from "react-native-paper-dates";
 
 export default function renderUserInput({ item }) {
   console.log("item", item.type);
-  const [inputDate, setInputDate] = useState(item.value);
+  const [inputDate, setInputDate] = useState(
+    item.value ? new Date(item.value) : null
+  );
   const theme = useTheme();
+
+  // Helper function to adjust date to avoid timezone issues
+  const adjustDate = (date) => {
+    const adjustedDate = new Date(date);
+    adjustedDate.setHours(12, 0, 0, 0); // Set time to noon
+    return adjustedDate;
+  };
+
   switch (item.type) {
     case "display":
       return <View style={userInputStyles.displayText} />;
@@ -54,7 +64,11 @@ export default function renderUserInput({ item }) {
           style={userInputStyles.textInput}
           label={item.placeholder}
           value={inputDate}
-          onChange={setInputDate}
+          onChange={(date) => {
+            const adjustedDate = adjustDate(date);
+            setInputDate(adjustedDate);
+            item.onChangeText(adjustedDate.toISOString().split("T")[0]);
+          }}
           mode="outlined"
           validRange={{ startDate: new Date(1900, 0, 1), endDate: new Date() }}
         />
