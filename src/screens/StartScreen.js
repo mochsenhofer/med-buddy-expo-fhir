@@ -1,6 +1,7 @@
 import React from "react";
 import BasicLayout from "../components/common/BasicLayout";
-import { Text } from "react-native-paper";
+import { languageSelectionScreenRoute } from "../navigation/Navigation";
+import renderItem from "../utils/renderItem";
 
 export default function StartScreen() {
   const DATA = [
@@ -22,9 +23,12 @@ export default function StartScreen() {
     },
   ];
 
-  const renderItem = ({ item }) => <Text>{item}</Text>;
-
   return (
-    <BasicLayout title={"Start"} sections={DATA} renderItem={renderItem} />
+    <BasicLayout
+      title={"Start"}
+      sections={DATA}
+      renderItem={renderItem}
+      navigateTo={languageSelectionScreenRoute}
+    />
   );
 }
