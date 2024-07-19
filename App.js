@@ -1,18 +1,14 @@
 import React from "react";
-import { SafeAreaView, StyleSheet, Text } from "react-native";
+import { SafeAreaView, StyleSheet } from "react-native";
 import { PaperProvider } from "react-native-paper";
-import Header from "./src/components/common/Header";
-import Section from "./src/components/common/Section";
-import Footer from "./src/components/common/Footer";
+import StartScreen from "./src/screens/StartScreen";
 import theme from "./src/theme/theme";
 
 export default function App() {
   return (
     <PaperProvider theme={theme}>
       <SafeAreaView style={styles.appContainer}>
-        <Header />
-        <Section />
-        <Footer />
+        <StartScreen />
       </SafeAreaView>
     </PaperProvider>
   );
