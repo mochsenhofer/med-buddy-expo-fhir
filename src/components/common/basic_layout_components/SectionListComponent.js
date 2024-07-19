@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet, SectionList } from "react-native";
-import { Text } from "react-native-paper";
+import renderSectionHeader from "../../../utils/renderSectionHeader";
 
 export default function SectionListComponent({ sections, renderItem }) {
   return (
@@ -10,9 +10,7 @@ export default function SectionListComponent({ sections, renderItem }) {
         sections={sections}
         keyExtractor={(item, index) => item + index}
         renderItem={renderItem}
-        renderSectionHeader={({ section: { title } }) => (
-          <Text style={{ fontWeight: "bold" }}>{title}</Text>
-        )}
+        renderSectionHeader={renderSectionHeader}
       />
     </View>
   );
