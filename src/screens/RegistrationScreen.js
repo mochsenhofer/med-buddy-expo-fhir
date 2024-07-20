@@ -1,7 +1,7 @@
 import React from "react";
-import { Text } from "react-native-paper";
 import BasicLayout from "../components/common/BasicLayout";
 import { previewScreenRoute } from "../navigation/Navigation";
+import renderItem from "../utils/renderItem";
 
 export default function RegistrationScreen() {
   const DATA = [
@@ -22,8 +22,6 @@ export default function RegistrationScreen() {
       data: ["Cheese Cake", "Ice Cream"],
     },
   ];
-
-  const renderItem = ({ item }) => <Text>{item}</Text>;
 
   return (
     <BasicLayout
