@@ -1,10 +1,13 @@
 import React from "react";
-import { View, StyleSheet, SectionList } from "react-native";
+import { KeyboardAvoidingView, StyleSheet, SectionList } from "react-native";
 import renderSectionHeader from "../../../utils/renderSectionHeader";
 
 export default function SectionListComponent({ sections, renderItem }) {
   return (
-    <View style={styles.sectionListContainer}>
+    <KeyboardAvoidingView
+      style={styles.sectionListContainer}
+      behavior="padding"
+    >
       <SectionList
         style={styles.sectionList}
         sections={sections}
@@ -12,7 +15,7 @@ export default function SectionListComponent({ sections, renderItem }) {
         renderItem={renderItem}
         renderSectionHeader={renderSectionHeader}
       />
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
