@@ -1,16 +1,29 @@
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
-import { useTheme } from "react-native-paper";
+import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { marginScreenBorderComponents } from "../../../theme/constants";
+import { useNavigation } from "@react-navigation/native";
+import { startScreenRoute } from "../../../navigation/Navigation";
+
+function MedBuddyCornerLogo() {
+  const navigation = useNavigation();
+
+  return (
+    <TouchableOpacity
+      onPress={() => navigation.navigate(startScreenRoute)}
+      style={styles.cornerLogo}
+    >
+      <Image
+        style={styles.icon}
+        source={require("../../../assets/images/logo.png")}
+      />
+    </TouchableOpacity>
+  );
+}
 
 export default function Header({ title }) {
-  const theme = useTheme();
   return (
-    <View
-      style={[
-        { backgroundColor: theme.colors.primary },
-        styles.headerContainer,
-      ]}
-    >
+    <View style={[styles.headerContainer]}>
+      <MedBuddyCornerLogo />
       <Text style={styles.headerText}>{title}</Text>
     </View>
   );
@@ -23,8 +36,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
   },
+  icon: {
+    width: 80,
+    height: 80,
+  },
+  cornerLogo: {
+    position: "absolute",
+    top: marginScreenBorderComponents,
+    left: marginScreenBorderComponents,
+  },
   headerText: {
-    color: "white",
+    color: "black",
     textAlign: "center",
   },
 });
