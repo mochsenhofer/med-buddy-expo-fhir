@@ -1,30 +1,20 @@
 import React from "react";
-import { Button } from "react-native-paper";
-import { StyleSheet } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { registrationScreenRoute } from "../navigation/Navigation";
-import { Image } from "react-native";
+import { Text } from "react-native-paper";
+import { TouchableOpacity, View, StyleSheet, Image } from "react-native";
+import { p } from "../theme/constants";
 
 export default function renderSelectLanguageButton({ item }) {
-  const navigation = useNavigation();
-  function handleSelectLanguageButtonPress() {
-    console.log(item.value);
-    navigation.navigate(registrationScreenRoute);
-  }
   return (
-    <Button
-      mode="outlined"
+    <TouchableOpacity
       style={styles.selectLanguageButton}
-      onPress={handleSelectLanguageButtonPress}
-      icon={() => (
-        <Image
-          style={styles.icon}
-          source={require("../assets/adaptive-icon.png")}
-        />
-      )}
+      onPress={() => item.onPress(item.value)}
     >
-      {item.label}
-    </Button>
+      <Image style={styles.icon} source={item.icon} />
+      <View style={styles.textContainer}>
+        <Text variant={p}>{item.label}</Text>
+        <Text>{item.description}</Text>
+      </View>
+    </TouchableOpacity>
   );
 }
 
@@ -33,12 +23,19 @@ const styles = StyleSheet.create({
     borderColor: "black",
     borderWidth: 3,
     borderRadius: 1000,
-    marginBottom: 10,
-    width: "25%",
+    margin: 5,
+    width: "31%",
+    justifyContent: "center",
     alignItems: "center",
+    flexDirection: "row",
+  },
+  textContainer: {
+    alignItems: "flex-start",
+    justifyContent: "center",
   },
   icon: {
     width: 80,
     height: 80,
+    borderRadius: 1000,
   },
 });
