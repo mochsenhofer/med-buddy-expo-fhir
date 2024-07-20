@@ -1,3 +1,3 @@
-export const marginScreenBorderComponents = 20;
+export const marginScreenBorderComponents = 10;
 export const p = "titleLarge";
 export const h2 = "headlineSmall";
