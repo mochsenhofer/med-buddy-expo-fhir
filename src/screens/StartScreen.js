@@ -1,34 +1,31 @@
 import React from "react";
-import BasicLayout from "../components/common/BasicLayout";
+import { TouchableOpacity, Image, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { languageSelectionScreenRoute } from "../navigation/Navigation";
-import renderItem from "../utils/renderItem";
 
 export default function StartScreen() {
-  const DATA = [
-    {
-      title: "Main dishes",
-      data: ["Pizza", "Burger", "Risotto"],
-    },
-    {
-      title: "Sides",
-      data: ["French Fries", "Onion Rings", "Fried Shrimps"],
-    },
-    {
-      title: "Drinks",
-      data: ["Water", "Coke", "Beer"],
-    },
-    {
-      title: "Desserts",
-      data: ["Cheese Cake", "Ice Cream"],
-    },
-  ];
-
+  const navigation = useNavigation();
   return (
-    <BasicLayout
-      title={"Start"}
-      sections={DATA}
-      renderItem={renderItem}
-      navigateTo={languageSelectionScreenRoute}
-    />
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => navigation.navigate(languageSelectionScreenRoute)}
+    >
+      <Image
+        style={styles.image}
+        source={require("../assets/images/home-logo.png")}
+      />
+    </TouchableOpacity>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  image: {
+    width: "75%",
+    resizeMode: "contain",
+  },
+});
