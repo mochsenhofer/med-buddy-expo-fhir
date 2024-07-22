@@ -2,13 +2,13 @@ import React from "react";
 import { Text } from "react-native-paper";
 import { p } from "../theme/constants";
 import renderUserInput from "./renderUserInput";
-import { userInputStyles } from "../components/functional/user_input_components/TextInputComponent";
+import { StyleSheet } from "react-native";
 
 export default function renderQuestionItem({ item }) {
   return (
     <>
       {item.type === "choice" || item.type === "display" ? (
-        <Text variant={p} style={userInputStyles.textInput}>
+        <Text style={styles.text} variant={p}>
           {item.text}
         </Text>
       ) : null}
@@ -17,3 +17,11 @@ export default function renderQuestionItem({ item }) {
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  text: {
+    margin: 5,
+
+    fontSize: 20,
+  },
+});
