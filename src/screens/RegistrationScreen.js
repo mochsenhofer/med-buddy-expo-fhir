@@ -2,11 +2,27 @@ import React, { useRef } from "react";
 import BasicLayout from "../components/common/BasicLayout";
 import { previewScreenRoute } from "../navigation/Navigation";
 import renderQuestionItem from "../utils/renderQuestionItem";
+import { useSelector, useDispatch } from "react-redux";
+import { en, de, pl, registerTranslation } from "react-native-paper-dates";
+import {
+  updateGivenName,
+  updateFamilyName,
+  updateInsuranceNumber,
+  updateBirthDate,
+  updateGender,
+  updatePatientId,
+} from "../store/patientReducer";
 
 export default function RegistrationScreen() {
+  const registeredPatient = useSelector((state) => state.patient);
+  const language = useSelector((state) => state.language);
+  const dispatch = useDispatch();
   const lastNameRef = useRef(null);
   const insuranceNumberRef = useRef(null);
   const dobRef = useRef(null);
+  registerTranslation("en", en);
+  registerTranslation("de", de);
+  registerTranslation("pl", pl);
 
   const registrationScreenData = [
     {
@@ -15,40 +31,43 @@ export default function RegistrationScreen() {
         {
           linkId: "p.1",
           text: "First Name",
-          value: "",
+          value: registeredPatient.name[0].given,
           type: "string",
-          onChangeText: (text) => console.log(text),
+          onChangeText: (text) => dispatch(updateGivenName(text)),
           onSubmitEditing: () => lastNameRef.current.focus(),
           autoFocus: true,
         },
         {
           linkId: "p.2",
           text: "Last Name",
-          value: "",
+          value: registeredPatient.name[0].family,
           type: "string",
           ref: lastNameRef,
           onSubmitEditing: () => insuranceNumberRef.current.focus(),
-          onChangeText: (text) => console.log(text),
+          onChangeText: (text) => dispatch(updateFamilyName(text)),
         },
         {
           linkId: "p.3",
           text: "Insurance Number",
-          value: "",
+          value: registeredPatient.identifier[0].value,
           type: "integer",
           ref: insuranceNumberRef,
           maxLength: 10,
-          onChangeText: (text) => console.log(text),
+          onChangeText: (text) => dispatch(updateInsuranceNumber(text)),
         },
         {
           linkId: "p.4",
           text: "Date of Birth",
-          value: "",
+          value: registeredPatient.birthDate,
           type: "date",
+          ref: dobRef,
+          onChangeText: (text) => dispatch(updateBirthDate(text)),
+          locale: language,
         },
         {
           linkId: "p.5",
           text: "Gender",
-          value: "",
+          value: registeredPatient.gender,
           type: "choice",
         },
       ],
