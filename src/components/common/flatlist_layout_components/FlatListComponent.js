@@ -10,6 +10,10 @@ export default function FlatListComponent({ data, renderItem, numColumns }) {
         keyExtractor={(item, index) => item + index}
         renderItem={renderItem}
         numColumns={numColumns}
+        contentContainerStyle={{
+          alignItems: "center",
+        }}
+        scrollEnabled={false}
       />
     </KeyboardAvoidingView>
   );
@@ -18,10 +22,9 @@ export default function FlatListComponent({ data, renderItem, numColumns }) {
 const styles = StyleSheet.create({
   flatListContainer: {
     flex: 4,
-    width: "75%",
+    width: "100%",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "yellow",
   },
   flatList: {
     flex: 1,
