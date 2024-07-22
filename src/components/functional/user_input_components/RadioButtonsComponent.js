@@ -51,5 +51,6 @@ const styles = {
     width: "32%",
     marginHorizontal: 5,
     borderWidth: 2,
+    height: 45,
   },
 };
