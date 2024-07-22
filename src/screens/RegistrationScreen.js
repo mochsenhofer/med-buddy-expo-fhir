@@ -3,7 +3,6 @@ import BasicLayout from "../components/common/BasicLayout";
 import { previewScreenRoute } from "../navigation/Navigation";
 import renderQuestionItem from "../utils/renderQuestionItem";
 import { useSelector, useDispatch } from "react-redux";
-import { en, de, pl, registerTranslation } from "react-native-paper-dates";
 import {
   updateGivenName,
   updateFamilyName,
@@ -15,14 +14,11 @@ import {
 
 export default function RegistrationScreen() {
   const registeredPatient = useSelector((state) => state.patient);
-  const language = useSelector((state) => state.language);
+  const language = registeredPatient.communication[0].language.coding[0].code;
   const dispatch = useDispatch();
   const lastNameRef = useRef(null);
   const insuranceNumberRef = useRef(null);
   const dobRef = useRef(null);
-  registerTranslation("en", en);
-  registerTranslation("de", de);
-  registerTranslation("pl", pl);
 
   const registrationScreenData = [
     {
