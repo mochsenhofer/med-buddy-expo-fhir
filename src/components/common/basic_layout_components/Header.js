@@ -1,8 +1,10 @@
 import React from "react";
-import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { Text } from "react-native-paper";
 import { marginScreenBorderComponents } from "../../../theme/constants";
 import { useNavigation } from "@react-navigation/native";
 import { startScreenRoute } from "../../../navigation/Navigation";
+import { h1 } from "../../../theme/constants";
 
 function MedBuddyCornerLogo() {
   const navigation = useNavigation();
@@ -24,7 +26,9 @@ export default function Header({ title }) {
   return (
     <View style={[styles.headerContainer]}>
       <MedBuddyCornerLogo />
-      <Text style={styles.headerText}>{title}</Text>
+      <Text variant={h1} style={styles.headerText}>
+        {title}
+      </Text>
     </View>
   );
 }
