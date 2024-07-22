@@ -26,6 +26,7 @@ export default function DateInputComponent({ item }) {
       onChange={handleDateChange}
       inputMode="start"
       style={userInputStyles.textInput}
+      validRange={{ startDate: new Date(1900, 0, 1), endDate: new Date() }}
     />
   );
 }
