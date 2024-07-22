@@ -1,12 +1,16 @@
 import React from "react";
 import { PaperProvider } from "react-native-paper";
+import { store } from "./src/store/store";
+import { Provider } from "react-redux";
 import MedBuddyStackNavigation from "./src/navigation/Navigation";
 import theme from "./src/theme/theme";
 
 export default function App() {
   return (
-    <PaperProvider theme={theme}>
-      <MedBuddyStackNavigation />
-    </PaperProvider>
+    <Provider store={store}>
+      <PaperProvider theme={theme}>
+        <MedBuddyStackNavigation />
+      </PaperProvider>
+    </Provider>
   );
 }
