@@ -14,6 +14,7 @@ export default function SectionListComponent({ sections, renderItem }) {
         keyExtractor={(item, index) => item + index}
         renderItem={renderItem}
         renderSectionHeader={renderSectionHeader}
+        stickySectionHeadersEnabled={false}
       />
     </KeyboardAvoidingView>
   );
@@ -25,11 +26,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "flex-start",
     width: "75%",
-    backgroundColor: "yellow",
   },
   sectionList: {
     flex: 1,
     width: "100%",
-    backgroundColor: "green",
   },
 });
