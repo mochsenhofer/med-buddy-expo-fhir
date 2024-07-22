@@ -16,7 +16,7 @@ export default function DateInputComponent({ item }) {
     setInputDate(adjustedDate);
     item.onChangeText(adjustedDate.toISOString().split("T")[0]);
   }
-
+  console.log(item.locale);
   return (
     <DatePickerInput
       mode="outlined"
