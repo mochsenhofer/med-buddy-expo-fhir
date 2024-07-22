@@ -78,7 +78,7 @@ export default function RegistrationScreen() {
 
   return (
     <BasicLayout
-      title={registeredPatient.gender}
+      title={"Registration"}
       sections={registrationScreenData}
       renderItem={renderQuestionItem}
       navigateTo={previewScreenRoute}
