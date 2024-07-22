@@ -13,7 +13,12 @@ export default function renderUserInput(item) {
     case "integer":
       return <TextInputComponent item={item} />;
     case "choice":
-      return <RadioButtonsComponent item={item} />;
+      return (
+        <RadioButtonsComponent
+          options={item.answerOption}
+          onSelect={item.onSelect}
+        />
+      );
     default:
       return <Text>Invalid Input</Text>;
   }
