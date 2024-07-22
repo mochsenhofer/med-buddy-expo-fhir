@@ -65,6 +65,12 @@ export default function RegistrationScreen() {
           text: "Gender",
           value: registeredPatient.gender,
           type: "choice",
+          onSelect: (value) => dispatch(updateGender(value)),
+          answerOption: [
+            { valueCoding: { code: "male", text: "Male" } },
+            { valueCoding: { code: "female", text: "Female" } },
+            { valueCoding: { code: "other", text: "Other" } },
+          ],
         },
       ],
     },
@@ -72,7 +78,7 @@ export default function RegistrationScreen() {
 
   return (
     <BasicLayout
-      title={"Registration"}
+      title={registeredPatient.gender}
       sections={registrationScreenData}
       renderItem={renderQuestionItem}
       navigateTo={previewScreenRoute}
