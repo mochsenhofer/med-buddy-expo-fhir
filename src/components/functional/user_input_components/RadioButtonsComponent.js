@@ -3,7 +3,7 @@ import { Button } from "react-native-paper";
 
 function RadioButton({ text, selected, onSelect }) {
   return (
-    <Button onPress={onSelect} mode={selected ? "contained" : "outlined"}>
+    <Button onPress={onSelect} mode={selected ? "contained-tonal" : "outlined"}>
       {text}
     </Button>
   );
