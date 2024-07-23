@@ -14,6 +14,7 @@ export default function renderSectionHeader({ section: { title } }) {
 
 const styles = StyleSheet.create({
   h2: {
+    marginTop: 25,
     marginBottom: 5,
     color: theme.colors.primary,
     textTransform: "uppercase",
