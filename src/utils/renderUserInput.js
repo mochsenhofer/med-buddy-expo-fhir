@@ -3,14 +3,17 @@ import DateInputComponent from "../components/functional/user_input_components/D
 import RadioButtonsComponent from "../components/functional/user_input_components/RadioButtonsComponent";
 import TextInputComponent from "../components/functional/user_input_components/TextInputComponent";
 
-export default function renderUserInput(item, { onSelect, currentValue }) {
+export default function renderUserInput(
+  item,
+  { onSelect, onChangeText, currentValue }
+) {
   switch (item.type) {
     case "string":
-      return <TextInputComponent item={item} />;
+      return <TextInputComponent item={item} onChangeText={onChangeText} />;
     case "date":
       return <DateInputComponent item={item} />;
     case "integer":
-      return <TextInputComponent item={item} />;
+      return <TextInputComponent item={item} onChangeText={onChangeText} />;
     case "choice":
       return (
         <RadioButtonsComponent
