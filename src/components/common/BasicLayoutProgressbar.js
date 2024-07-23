@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "./basic_layout_components/Header";
+import HeaderWithProgressBar from "./basic_layout_components/HeaderWithProgressBar";
 import SectionListComponent from "./basic_layout_components/SectionListComponent";
 import FooterNavigation from "./basic_layout_components/FooterNavigation";
 import { View, StyleSheet } from "react-native";
@@ -11,15 +11,18 @@ export default function BasicLayoutProgressBar({
   onNextButtonPress,
   onBackButtonPress,
   navigateTo,
+  currentStep,
+  page,
 }) {
   return (
     <View style={styles.container}>
-      <Header title={title} />
+      <HeaderWithProgressBar title={title} currentStep={currentStep} />
       <SectionListComponent sections={sections} renderItem={renderItem} />
       <FooterNavigation
         onNextButtonPress={onNextButtonPress}
         onBackButtonPress={onBackButtonPress}
         navigateTo={navigateTo}
+        page={page}
       />
     </View>
   );
