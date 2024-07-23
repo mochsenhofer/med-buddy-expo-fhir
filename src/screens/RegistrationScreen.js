@@ -11,6 +11,7 @@ import {
   updateGender,
   updatePatientId,
 } from "../store/patientReducer";
+import { texts } from "../languages/texts";
 
 export default function RegistrationScreen() {
   const registeredPatient = useSelector((state) => state.patient);
@@ -19,14 +20,15 @@ export default function RegistrationScreen() {
   const lastNameRef = useRef(null);
   const insuranceNumberRef = useRef(null);
   const dobRef = useRef(null);
+  const text = texts.en.registrationScreen;
 
   const registrationScreenData = [
     {
-      title: "Please provide your personal information: ",
+      title: text.description,
       data: [
         {
           linkId: "p.1",
-          text: "First Name",
+          text: text["p.1"],
           value: registeredPatient.name[0].given,
           type: "string",
           onChangeText: (text) => dispatch(updateGivenName(text)),
@@ -35,7 +37,7 @@ export default function RegistrationScreen() {
         },
         {
           linkId: "p.2",
-          text: "Last Name",
+          text: text["p.2"],
           value: registeredPatient.name[0].family,
           type: "string",
           ref: lastNameRef,
@@ -44,7 +46,7 @@ export default function RegistrationScreen() {
         },
         {
           linkId: "p.3",
-          text: "Insurance Number",
+          text: text["p.3"],
           value: registeredPatient.identifier[0].value,
           type: "integer",
           ref: insuranceNumberRef,
@@ -53,7 +55,7 @@ export default function RegistrationScreen() {
         },
         {
           linkId: "p.4",
-          text: "Date of Birth",
+          text: text["p.4"],
           value: registeredPatient.birthDate,
           type: "date",
           ref: dobRef,
@@ -62,14 +64,14 @@ export default function RegistrationScreen() {
         },
         {
           linkId: "p.5",
-          text: "Gender",
+          text: text["p.5"],
           value: registeredPatient.gender,
           type: "choice",
           onSelect: (value) => dispatch(updateGender(value)),
           answerOption: [
-            { valueCoding: { code: "male", text: "Male" } },
-            { valueCoding: { code: "female", text: "Female" } },
-            { valueCoding: { code: "other", text: "Other" } },
+            { valueCoding: { code: "male", display: text.male } },
+            { valueCoding: { code: "female", display: text.female } },
+            { valueCoding: { code: "other", display: text.other } },
           ],
         },
       ],
