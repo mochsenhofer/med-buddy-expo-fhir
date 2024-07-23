@@ -26,7 +26,7 @@ export default function useQuestionnaireData() {
             item: [
               {
                 linkId: "i.1.1",
-                text: "Hallo",
+                text: informationText["i.1.1"],
                 type: "display",
               },
             ],
