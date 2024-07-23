@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { Button } from "react-native-paper";
+import { Button, Text } from "react-native-paper";
 import { marginScreenBorderComponents } from "../../../theme/constants";
 import { useNavigation } from "@react-navigation/native";
 import theme from "../../../theme/theme";
@@ -9,6 +9,7 @@ export default function FooterNavigation({
   onNextButtonPress,
   onBackButtonPress,
   navigateTo,
+  page,
 }) {
   const navigation = useNavigation();
 
@@ -39,6 +40,7 @@ export default function FooterNavigation({
       >
         BACK
       </Button>
+      <Text>{page}</Text>
       <Button
         icon="arrow-right"
         mode="contained"
