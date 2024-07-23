@@ -45,12 +45,12 @@ export default function RadioButtons({ options, onSelect }) {
 const styles = {
   radioButtonFlatList: {
     width: "100%",
-    alignItems: "space-between",
+    justifyContent: "space-between",
   },
   radioButtonStyle: {
-    width: "32%",
-    marginHorizontal: 5,
+    width: "30%",
+    marginHorizontal: 10,
     borderWidth: 2,
-    height: 45,
+    height: 40,
   },
 };
