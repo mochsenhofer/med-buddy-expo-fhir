@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import BasicLayout from "../components/common/BasicLayout";
+import BasicLayoutProgressBar from "../components/common/BasicLayoutProgressbar";
 import renderQuestionItem from "../utils/renderQuestionItem";
 import useQuestionnaireData from "../hooks/useQuestionnaireData";
 import { useNavigation } from "@react-navigation/native";
@@ -11,12 +11,22 @@ export default function QuestionnaireScreen() {
     useQuestionnaireData();
   const [page, setPage] = useState(0);
   const [sections, setSections] = useState(informationSections);
+  const overviewSections = [
+    {
+      title: "Overview",
+      data: [{}],
+    },
+  ];
 
   const allSections = [
     informationSections,
     questionnaireSections,
+    overviewSections,
     consentSections,
   ];
+
+  const sectionTitles = ["Information", "Questionnaire", "Overview", "Consent"];
+
   const [sectionIndex, setSectionIndex] = useState(0);
 
   const currentSection = [sections[page]];
@@ -46,12 +56,14 @@ export default function QuestionnaireScreen() {
   }
 
   return (
-    <BasicLayout
-      title={"QuestionnaireScreen"}
+    <BasicLayoutProgressBar
+      title={sectionTitles[sectionIndex]}
       sections={currentSection}
       renderItem={renderQuestionItem}
       onNextButtonPress={onNextButtonPress}
       onBackButtonPress={onBackButtonPress}
+      currentStep={sectionIndex}
+      page={page + 1 + "/" + sections.length}
     />
   );
 }
