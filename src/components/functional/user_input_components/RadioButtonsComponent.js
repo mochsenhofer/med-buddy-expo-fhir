@@ -33,7 +33,7 @@ export default function RadioButtons({ options, onSelect }) {
       keyExtractor={(item) => item.valueCoding.code}
       renderItem={({ item }) => (
         <RadioButton
-          text={item.valueCoding.text}
+          text={item.valueCoding.display}
           selected={selected === item.valueCoding.code}
           onSelect={() => handleSelect(item.valueCoding.code)}
         />
