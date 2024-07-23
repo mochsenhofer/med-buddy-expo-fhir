@@ -8,7 +8,8 @@ export default function BasicLayout({
   title,
   sections,
   renderItem,
-  handleNextButtonPress,
+  onNextButtonPress,
+  onBackButtonPress,
   navigateTo,
 }) {
   return (
@@ -16,7 +17,8 @@ export default function BasicLayout({
       <Header title={title} />
       <SectionListComponent sections={sections} renderItem={renderItem} />
       <FooterNavigation
-        handleNextButtonPress={handleNextButtonPress}
+        onNextButtonPress={onNextButtonPress}
+        onBackButtonPress={onBackButtonPress}
         navigateTo={navigateTo}
       />
     </View>
