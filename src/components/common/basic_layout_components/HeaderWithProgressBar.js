@@ -1,10 +1,11 @@
-import React from "react";
-import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
-import { Text } from "react-native-paper";
-import { marginScreenBorderComponents } from "../../../theme/constants";
 import { useNavigation } from "@react-navigation/native";
+import React from "react";
+import { Image, TouchableOpacity, View } from "react-native";
+import { Text } from "react-native-paper";
 import { startScreenRoute } from "../../../navigation/Navigation";
 import { h1 } from "../../../theme/constants";
+import ProgressBarComponent from "../../functional/user_input_components/ProgressBarComponent";
+import { headerStyles } from "./Header";
 
 function MedBuddyCornerLogo() {
   const navigation = useNavigation();
@@ -12,45 +13,24 @@ function MedBuddyCornerLogo() {
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate(startScreenRoute)}
-      style={styles.cornerLogo}
+      style={headerStyles.cornerLogo}
     >
       <Image
-        style={styles.icon}
+        style={headerStyles.icon}
         source={require("../../../assets/images/logo.png")}
       />
     </TouchableOpacity>
   );
 }
 
-export default function HeaderWithProgressBar({ title }) {
+export default function HeaderWithProgressBar({ title, currentStep }) {
   return (
-    <View style={[styles.headerContainer]}>
+    <View style={[headerStyles.headerContainer]}>
       <MedBuddyCornerLogo />
-      <Text variant={h1} style={styles.headerText}>
+      <Text variant={h1} style={headerStyles.headerText}>
         {title}
       </Text>
+      <ProgressBarComponent currentStep={currentStep} />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  headerContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    width: "100%",
-  },
-  icon: {
-    width: 80,
-    height: 80,
-  },
-  cornerLogo: {
-    position: "absolute",
-    top: marginScreenBorderComponents,
-    left: marginScreenBorderComponents,
-  },
-  headerText: {
-    color: "black",
-    textAlign: "center",
-  },
-});
