@@ -65,9 +65,13 @@ export default function QuestionnaireScreen() {
     // Add your handling logic here
   }
 
+  function handleTextChange(text) {
+    console.log("Text changed:", text);
+    // Add your handling
+  }
+
   function findCurrentValueByLinkId(item) {
     console.log("item:", item);
-    return "Y";
   }
 
   return (
@@ -77,7 +81,8 @@ export default function QuestionnaireScreen() {
       renderItem={({ item }) =>
         renderQuestionItem({
           item,
-          onSelect: handleSelect(item),
+          onSelect: handleSelect,
+          onChangeText: handleTextChange,
           currentValue: findCurrentValueByLinkId(item),
         })
       }
