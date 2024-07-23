@@ -18,8 +18,8 @@ function RadioButton({ text, selected, onSelect }) {
   );
 }
 
-export default function RadioButtons({ options, onSelect }) {
-  const [selected, setSelected] = useState(false);
+export default function RadioButtons({ options, onSelect, currentValue }) {
+  const [selected, setSelected] = useState(currentValue);
 
   function handleSelect(value) {
     setSelected(value);
