@@ -12,10 +12,10 @@ function MedBuddyCornerLogo() {
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate(startScreenRoute)}
-      style={styles.cornerLogo}
+      style={headerStyles.cornerLogo}
     >
       <Image
-        style={styles.icon}
+        style={headerStyles.icon}
         source={require("../../../assets/images/logo.png")}
       />
     </TouchableOpacity>
@@ -24,21 +24,22 @@ function MedBuddyCornerLogo() {
 
 export default function Header({ title }) {
   return (
-    <View style={[styles.headerContainer]}>
+    <View style={[headerStyles.headerContainer]}>
       <MedBuddyCornerLogo />
-      <Text variant={h1} style={styles.headerText}>
+      <Text variant={h1} style={headerStyles.headerText}>
         {title}
       </Text>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
+export const headerStyles = StyleSheet.create({
   headerContainer: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
     width: "100%",
+    marginBottom: marginScreenBorderComponents,
   },
   icon: {
     width: 80,
@@ -52,5 +53,7 @@ const styles = StyleSheet.create({
   headerText: {
     color: "black",
     textAlign: "center",
+    marginTop: marginScreenBorderComponents * 2,
+    marginBottom: marginScreenBorderComponents,
   },
 });
