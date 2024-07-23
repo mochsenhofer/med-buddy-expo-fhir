@@ -6,23 +6,23 @@ import { useNavigation } from "@react-navigation/native";
 import theme from "../../../theme/theme";
 
 export default function FooterNavigation({
-  handleNextButtonPress,
-  handleBackButtonPress,
+  onNextButtonPress,
+  onBackButtonPress,
   navigateTo,
 }) {
   const navigation = useNavigation();
 
-  function onBackButtonPress() {
-    if (handleBackButtonPress) {
-      handleBackButtonPress();
+  function handleBackButtonPressed() {
+    if (onBackButtonPress) {
+      onBackButtonPress();
     } else {
       navigation.goBack();
     }
   }
 
-  function onNextButtonPress() {
-    if (handleNextButtonPress) {
-      handleNextButtonPress();
+  function handleNextButtonPressed() {
+    if (onNextButtonPress) {
+      onNextButtonPress();
     } else {
       navigation.navigate(navigateTo);
     }
@@ -35,7 +35,7 @@ export default function FooterNavigation({
         mode="outlined"
         style={[styles.navigationButton, styles.backButton]}
         labelStyle={styles.navigationButtonText}
-        onPress={onBackButtonPress}
+        onPress={handleBackButtonPressed}
       >
         BACK
       </Button>
@@ -45,7 +45,7 @@ export default function FooterNavigation({
         style={[styles.navigationButton, styles.nextButton]}
         contentStyle={{ flexDirection: "row-reverse" }}
         labelStyle={styles.navigationButtonText}
-        onPress={onNextButtonPress}
+        onPress={handleNextButtonPressed}
       >
         NEXT
       </Button>
