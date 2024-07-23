@@ -1,10 +1,9 @@
 import React from "react";
-import { Text } from "react-native-paper";
-import TextInputComponent from "../components/functional/user_input_components/TextInputComponent";
 import DateInputComponent from "../components/functional/user_input_components/DateInputComponent";
 import RadioButtonsComponent from "../components/functional/user_input_components/RadioButtonsComponent";
+import TextInputComponent from "../components/functional/user_input_components/TextInputComponent";
 
-export default function renderUserInput(item) {
+export default function renderUserInput(item, { onSelect, currentValue }) {
   switch (item.type) {
     case "string":
       return <TextInputComponent item={item} />;
@@ -16,7 +15,8 @@ export default function renderUserInput(item) {
       return (
         <RadioButtonsComponent
           options={item.answerOption}
-          onSelect={item.onSelect}
+          onSelect={onSelect}
+          currentValue={currentValue}
         />
       );
     default:
