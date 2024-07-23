@@ -22,7 +22,7 @@ export default function TextInputComponent({ item }) {
 export const userInputStyles = StyleSheet.create({
   textInput: {
     marginVertical: 5,
-    height: 45,
+    height: 40,
     justifyContent: "center",
   },
 });
