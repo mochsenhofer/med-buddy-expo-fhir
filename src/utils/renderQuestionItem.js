@@ -4,7 +4,7 @@ import { p } from "../theme/constants";
 import renderUserInput from "./renderUserInput";
 import { StyleSheet } from "react-native";
 
-export default function renderQuestionItem({ item }) {
+export default function renderQuestionItem({ item, onSelect, currentValue }) {
   return (
     <>
       {item.type === "choice" || item.type === "display" ? (
@@ -13,7 +13,7 @@ export default function renderQuestionItem({ item }) {
         </Text>
       ) : null}
 
-      {renderUserInput(item)}
+      {renderUserInput(item, { onSelect, currentValue })}
     </>
   );
 }
