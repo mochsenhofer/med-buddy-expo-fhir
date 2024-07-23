@@ -4,9 +4,14 @@ import renderQuestionItem from "../utils/renderQuestionItem";
 import useQuestionnaireData from "../hooks/useQuestionnaireData";
 import { useNavigation } from "@react-navigation/native";
 import { overviewScreenRoute } from "../navigation/Navigation";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function QuestionnaireScreen() {
   const navigation = useNavigation();
+  const questionnaireResponseState = useSelector(
+    (state) => state.questionnaireResponse
+  );
+  console.log("questionnaireResponseState:", questionnaireResponseState);
   const { informationSections, questionnaireSections, consentSections } =
     useQuestionnaireData();
   const [page, setPage] = useState(0);
@@ -55,11 +60,27 @@ export default function QuestionnaireScreen() {
     }
   }
 
+  function handleSelect(option) {
+    console.log("Selected option:", option);
+    // Add your handling logic here
+  }
+
+  function findCurrentValueByLinkId(item) {
+    console.log("item:", item);
+    return "Y";
+  }
+
   return (
     <BasicLayoutProgressBar
       title={sectionTitles[sectionIndex]}
       sections={currentSection}
-      renderItem={renderQuestionItem}
+      renderItem={({ item }) =>
+        renderQuestionItem({
+          item,
+          onSelect: handleSelect(item),
+          currentValue: findCurrentValueByLinkId(item),
+        })
+      }
       onNextButtonPress={onNextButtonPress}
       onBackButtonPress={onBackButtonPress}
       currentStep={sectionIndex}
