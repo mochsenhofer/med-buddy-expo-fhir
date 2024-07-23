@@ -20,6 +20,6 @@ export default function renderUserInput(item) {
         />
       );
     default:
-      return <Text>Invalid Input</Text>;
+      return null;
   }
 }
