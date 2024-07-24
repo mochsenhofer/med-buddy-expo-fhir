@@ -6,6 +6,16 @@ import renderQuestionItem from "../utils/renderQuestionItem";
 import useQuestionnaireData from "../hooks/useQuestionnaireData";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  updateValueInteger,
+  updateValueString,
+  updateValueCoding,
+  updatePatient,
+  updateQuestionnaire,
+  updateQuestionnaireResponseStatus,
+  updateQuestionnaireId,
+  updateAuthor,
+} from "../store/questionnaireResponseReducer";
 
 export default function QuestionnaireScreen() {
   const navigation = useNavigation();
@@ -22,9 +32,13 @@ export default function QuestionnaireScreen() {
 
   const questionnaireText = texts.en.questionnaireScreen.questionnaire;
   const consentText = texts.en.questionnaireScreen.consent;
+
+  function getValueByLinkId(linkId) {}
+
   const questionnaireSections = [
     {
       title: questionnaireText["q.1"],
+      linkId: "q.1",
       data: [
         {
           linkId: "q.1.1",
@@ -32,7 +46,8 @@ export default function QuestionnaireScreen() {
           value: "",
           type: "integer",
           maxLength: 3,
-          onChangeText: (text) => console.log(text),
+          onChangeText: (text) =>
+            dispatch(updateValueInteger({ linkId: "q.1.1", value: text })),
           onSubmitEditing: () => weightRef.current.focus(),
           autoFocus: true,
           ref: sizeRef,
@@ -43,7 +58,8 @@ export default function QuestionnaireScreen() {
           value: "",
           type: "integer",
           maxLength: 3,
-          onChangeText: (text) => console.log(text),
+          onChangeText: (text) =>
+            dispatch(updateValueInteger({ linkId: "q.1.2", value: text })),
           ref: weightRef,
         },
         {
@@ -51,7 +67,8 @@ export default function QuestionnaireScreen() {
           text: questionnaireText["q.1.3"],
           value: "",
           type: "choice",
-          onSelect: (value) => console.log(value),
+          onSelect: (value) =>
+            dispatch(updateValueCoding({ linkId: "q.1.3", value })),
           answerOption: [
             { valueCoding: { code: "Y", display: questionnaireText["q.yes"] } },
             { valueCoding: { code: "N", display: questionnaireText["q.no"] } },
@@ -67,6 +84,7 @@ export default function QuestionnaireScreen() {
     },
     {
       title: questionnaireText["q.2"],
+      linkId: "q.2",
       data: [
         {
           linkId: "q.2.1",
@@ -140,6 +158,7 @@ export default function QuestionnaireScreen() {
     },
     {
       title: questionnaireText["q.3"],
+      linkId: "q.3",
       data: [
         {
           linkId: "q.3.1",
