@@ -11,11 +11,47 @@ export default function QuestionnaireScreen() {
   const questionnaireResponseState = useSelector(
     (state) => state.questionnaireResponse
   );
-  console.log("questionnaireResponseState:", questionnaireResponseState);
-  const { informationSections, questionnaireSections, consentSections } =
-    useQuestionnaireData();
+  const {
+    informationSections,
+    sectionWithLinkIdQuestionnaire,
+    consentSections,
+  } = useQuestionnaireData();
   const [page, setPage] = useState(0);
   const [sections, setSections] = useState(informationSections);
+
+  function findQuestionnaireSectionTitle(linkId) {
+    return sectionWithLinkIdQuestionnaire.item.find(
+      (qItem) => qItem.linkId === linkId
+    ).text;
+  }
+
+  function findItemByLinkId(linkId) {
+    for (const item of sectionWithLinkIdQuestionnaire.item) {
+      if (item.linkId === linkId) {
+        return item;
+      }
+      if (item.item) {
+        const found = findItemByLinkId(linkId, item.item);
+        if (found) {
+          return found;
+        }
+      }
+    }
+    return null;
+  }
+
+  const questionnaireSections = [
+    {
+      title: findQuestionnaireSectionTitle("q.1"),
+      data: [
+        {
+          linkId: "q.1.1",
+          text: findItemByLinkId("q.1.1", sectionWithLinkIdQuestionnaire.item),
+        },
+      ],
+    },
+  ];
+
   const overviewSections = [
     {
       title: "Overview",
@@ -60,32 +96,13 @@ export default function QuestionnaireScreen() {
     }
   }
 
-  function handleSelect(option) {
-    console.log("Selected option:", option);
-    // Add your handling logic here
-  }
-
-  function handleTextChange(text) {
-    console.log("Text changed:", text);
-    // Add your handling
-  }
-
-  function findCurrentValueByLinkId(item) {
-    console.log("item:", item);
-  }
+  function findItemByLinkId(linkId) {}
 
   return (
     <BasicLayoutProgressBar
       title={sectionTitles[sectionIndex]}
       sections={currentSection}
-      renderItem={({ item }) =>
-        renderQuestionItem({
-          item,
-          onSelect: handleSelect,
-          onChangeText: handleTextChange,
-          currentValue: findCurrentValueByLinkId(item),
-        })
-      }
+      renderItem={renderQuestionItem}
       onNextButtonPress={onNextButtonPress}
       onBackButtonPress={onBackButtonPress}
       currentStep={sectionIndex}
