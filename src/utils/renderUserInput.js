@@ -16,6 +16,7 @@ export default function renderUserInput(item) {
         <RadioButtonsComponent
           options={item.answerOption}
           onSelect={item.onSelect}
+          currentValue={item.value}
         />
       );
     default:
