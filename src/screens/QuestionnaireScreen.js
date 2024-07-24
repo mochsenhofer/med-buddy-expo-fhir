@@ -16,6 +16,7 @@ export default function QuestionnaireScreen() {
   const weightRef = useRef(null);
 
   const questionnaireText = texts.en.questionnaireScreen.questionnaire;
+  const consentText = texts.en.questionnaireScreen.consent;
   const questionnaireSections = [
     {
       title: questionnaireText["q.1"],
@@ -360,8 +361,55 @@ export default function QuestionnaireScreen() {
       ],
     },
   ];
+  const overviewSections = [
+    {
+      title: "Test",
+      data: [
+        {
+          text: "This is a test",
+          type: "display",
+        },
+      ],
+    },
+  ];
+  const consentSections = [
+    {
+      title: consentText["c.1"],
+      data: [
+        {
+          linkId: "c.1.1",
+          text: consentText["c.1.1"],
+          value: "",
+          type: "choice",
+          onSelect: (value) => console.log(value),
+          answerOption: [
+            { valueCoding: { code: "Y", display: questionnaireText["q.yes"] } },
+            { valueCoding: { code: "N", display: questionnaireText["q.no"] } },
+          ],
+        },
+      ],
+    },
+    {
+      title: consentText["c.2"],
+      data: [
+        {
+          linkId: "c.2.1",
+          text: consentText["c.2.1"],
+          value: "",
+          type: "string",
+          onChangeText: (text) => console.log(text),
+          autoFocus: true,
+        },
+      ],
+    },
+  ];
 
-  const allSections = [informationSections, questionnaireSections];
+  const allSections = [
+    informationSections,
+    questionnaireSections,
+    overviewSections,
+    consentSections,
+  ];
   const sectionTitles = ["Information", "Questionnaire", "Overview", "Consent"];
 
   const sections = allSections[sectionIndex];
