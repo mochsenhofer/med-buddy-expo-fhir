@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "react-native-paper";
 import { FlatList } from "react-native";
 import { useTheme } from "react-native-paper";
 
-function RadioButton({ text, selected, onSelect }) {
   const theme = useTheme();
   return (
     <Button
@@ -14,6 +13,7 @@ function RadioButton({ text, selected, onSelect }) {
       labelStyle={{ fontSize: 20 }}
     >
       {text}
+      {key}
     </Button>
   );
 }
@@ -25,12 +25,17 @@ export default function RadioButtons({ options, onSelect, currentValue }) {
     setSelected(value);
     onSelect(value);
   }
+
+  useEffect(() => {
+    setSelected(currentValue);
+  }, [currentValue]);
+
   return (
     <FlatList
       style={styles.radioButtonFlatList}
       data={options}
       numColumns={3}
-      keyExtractor={(item) => item.valueCoding.code}
+      keyExtractor={(item) => item.linkId}
       renderItem={({ item }) => (
         <RadioButton
           text={item.valueCoding.display}
