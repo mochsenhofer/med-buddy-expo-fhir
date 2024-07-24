@@ -91,9 +91,7 @@ export default function QuestionnaireScreen() {
           type: "integer",
           maxLength: 3,
           onChangeText: (text) =>
-            dispatch(
-              updateValueInteger({ linkId: "q.1.2", value: parseInt(text) })
-            ),
+            dispatch(updateValueInteger({ linkId: "q.1.2", value: text })),
           ref: weightRef,
         },
         {
@@ -411,7 +409,8 @@ export default function QuestionnaireScreen() {
           text: questionnaireText["q.5.1"],
           value: getValueByLinkId("valueString", "q.5.1"),
           type: "string",
-          onChangeText: (text) => console.log(text),
+          onChangeText: (text) =>
+            dispatch(updateValueString({ linkId: "q.5.1", value: text })),
           autoFocus: true,
         },
         {
