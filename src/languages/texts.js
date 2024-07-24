@@ -95,7 +95,15 @@ export const texts = {
         "q.unknown": "asked but unknown",
         "q.idk": "I don't know",
       },
-      overview: {},
+      overview: {
+        overviewSectionHeadings: {
+          "oSH.1": "Personal Information",
+          "oSH.2": "Previous Examinations",
+          "oSH.3": "Side Effects",
+          "oSH.4": "Medical Conditions",
+          "oSH.5": "Additional Information",
+        },
+      },
       consent: {
         "c.1": "Consent",
         "c.1.1": "The patient agrees to the examination: ",
