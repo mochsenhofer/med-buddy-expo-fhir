@@ -30,7 +30,7 @@ export const Patient = {
         coding: [
           {
             system: "urn:ietf:bcp:47",
-            code: "tr",
+            code: "en",
           },
         ],
       },
