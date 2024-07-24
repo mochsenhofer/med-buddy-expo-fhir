@@ -80,7 +80,7 @@ export default function RegistrationScreen() {
 
   return (
     <BasicLayout
-      title={"Registration"}
+      title={text.title}
       sections={registrationScreenData}
       renderItem={renderQuestionItem}
       navigateTo={previewScreenRoute}
