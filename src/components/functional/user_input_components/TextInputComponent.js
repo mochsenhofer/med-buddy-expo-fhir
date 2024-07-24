@@ -2,12 +2,12 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { TextInput } from "react-native-paper";
 
-export default function TextInputComponent({ item, onChangeText }) {
+export default function TextInputComponent({ item }) {
   return (
     <TextInput
       mode="outlined"
       label={item.text}
-      onChangeText={onChangeText}
+      onChangeText={item.onChangeText}
       inputMode={item.type === "integer" ? "numeric" : "text"}
       maxLength={item.maxLength}
       value={item.value}
