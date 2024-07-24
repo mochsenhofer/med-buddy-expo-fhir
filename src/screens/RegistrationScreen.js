@@ -29,7 +29,7 @@ export default function RegistrationScreen() {
         {
           linkId: "p.1",
           text: text["p.1"],
-          value: registeredPatient.name[0].given,
+          value: registeredPatient.name[0].given[0],
           type: "string",
           onChangeText: (text) => dispatch(updateGivenName(text)),
           onSubmitEditing: () => lastNameRef.current.focus(),
@@ -80,7 +80,7 @@ export default function RegistrationScreen() {
 
   return (
     <BasicLayout
-      title={text.title}
+      title={registeredPatient.name[0].given[0]}
       sections={registrationScreenData}
       renderItem={renderQuestionItem}
       navigateTo={previewScreenRoute}
