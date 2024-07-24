@@ -5,12 +5,17 @@ import { overviewScreenRoute } from "../navigation/Navigation";
 import renderQuestionItem from "../utils/renderQuestionItem";
 import useQuestionnaireData from "../hooks/useQuestionnaireData";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function QuestionnaireScreen() {
   const navigation = useNavigation();
   const [page, setPage] = useState(0);
   const [sectionIndex, setSectionIndex] = useState(0);
   const { informationSections } = useQuestionnaireData();
+  const dispatch = useDispatch();
+  const questionnaireResponseState = useSelector(
+    (state) => state.questionnaireResponse
+  );
 
   const sizeRef = useRef(null);
   const weightRef = useRef(null);
