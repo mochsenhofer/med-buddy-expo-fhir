@@ -3,6 +3,7 @@ import { Button } from "react-native-paper";
 import { FlatList } from "react-native";
 import { useTheme } from "react-native-paper";
 
+function RadioButton({ text, selected, onSelect }) {
   const theme = useTheme();
   return (
     <Button
