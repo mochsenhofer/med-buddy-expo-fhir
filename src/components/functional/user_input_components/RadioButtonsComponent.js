@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Button } from "react-native-paper";
 import { FlatList } from "react-native";
 import { useTheme } from "react-native-paper";
+import { useSelector } from "react-redux";
+import { texts } from "../../../languages/texts";
 
 function RadioButton({ text, selected, onSelect }) {
   const theme = useTheme();
@@ -14,12 +16,15 @@ function RadioButton({ text, selected, onSelect }) {
       labelStyle={{ fontSize: 20 }}
     >
       {text}
-      {key}
     </Button>
   );
 }
 
 export default function RadioButtons({ options, onSelect, currentValue }) {
+  const language = useSelector(
+    (state) => state.patient.communication[0].language.coding[0].code
+  );
+  const text = texts.en.questionnaireScreen.questionnaire;
   const [selected, setSelected] = useState(currentValue);
 
   function handleSelect(value) {
@@ -37,13 +42,18 @@ export default function RadioButtons({ options, onSelect, currentValue }) {
       data={options}
       numColumns={3}
       keyExtractor={(item) => item.linkId}
-      renderItem={({ item }) => (
-        <RadioButton
-          text={item.valueCoding.display}
-          selected={selected === item.valueCoding.code}
-          onSelect={() => handleSelect(item.valueCoding.code)}
-        />
-      )}
+      renderItem={({ item }) => {
+        if (item.valueCoding.code === "ASKU") {
+          item.valueCoding.display = text["q.idk"];
+        }
+        return (
+          <RadioButton
+            text={item.valueCoding.display}
+            selected={selected === item.valueCoding.code}
+            onSelect={() => handleSelect(item.valueCoding.code)}
+          />
+        );
+      }}
     />
   );
 }
