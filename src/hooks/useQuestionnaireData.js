@@ -731,8 +731,5 @@ export default function useQuestionnaireData() {
   return {
     Questionnaire,
     informationSections,
-    sectionWithLinkIdQuestionnaire,
-    questionnaireSections,
-    consentSections,
   };
 }
