@@ -1,10 +1,20 @@
-import React from "react";
-import { Text } from "react-native-paper";
-import BasicLayout from "../components/common/BasicLayout";
-import { overviewScreenRoute } from "../navigation/Navigation";
+import React, { useRef, useState } from "react";
+import BasicLayoutProgressbar from "../components/common/BasicLayoutProgressbar";
 import { texts } from "../languages/texts";
+import { overviewScreenRoute } from "../navigation/Navigation";
+import renderQuestionItem from "../utils/renderQuestionItem";
+import useQuestionnaireData from "../hooks/useQuestionnaireData";
+import { useNavigation } from "@react-navigation/native";
 
 export default function QuestionnaireScreen() {
+  const navigation = useNavigation();
+  const [page, setPage] = useState(0);
+  const [sectionIndex, setSectionIndex] = useState(0);
+  const { informationSections } = useQuestionnaireData();
+
+  const sizeRef = useRef(null);
+  const weightRef = useRef(null);
+
   const questionnaireText = texts.en.questionnaireScreen.questionnaire;
   const questionnaireSections = [
     {
@@ -17,8 +27,9 @@ export default function QuestionnaireScreen() {
           type: "integer",
           maxLength: 3,
           onChangeText: (text) => console.log(text),
-          onSubmitEditing: () => lastNameRef.current.focus(),
+          onSubmitEditing: () => weightRef.current.focus(),
           autoFocus: true,
+          ref: sizeRef,
         },
         {
           linkId: "q.1.2",
@@ -27,8 +38,7 @@ export default function QuestionnaireScreen() {
           type: "integer",
           maxLength: 3,
           onChangeText: (text) => console.log(text),
-          onSubmitEditing: () => lastNameRef.current.focus(),
-          autoFocus: true,
+          ref: weightRef,
         },
         {
           linkId: "q.1.3",
@@ -328,7 +338,6 @@ export default function QuestionnaireScreen() {
           value: "",
           type: "string",
           onChangeText: (text) => console.log(text),
-          onSubmitEditing: () => lastNameRef.current.focus(),
           autoFocus: true,
         },
         {
@@ -352,14 +361,42 @@ export default function QuestionnaireScreen() {
     },
   ];
 
-  const renderItem = ({ item }) => <Text>{item}</Text>;
+  const allSections = [informationSections, questionnaireSections];
+  const sectionTitles = ["Information", "Questionnaire", "Overview", "Consent"];
+
+  const sections = allSections[sectionIndex];
+  const currentSection = [sections[page]];
+
+  function onNextButtonPress() {
+    if (page < sections.length - 1) {
+      setPage(page + 1);
+    } else if (sectionIndex < allSections.length - 1) {
+      setSectionIndex(sectionIndex + 1);
+      setPage(0);
+    } else {
+      navigation.navigate(overviewScreenRoute);
+    }
+  }
+
+  function onBackButtonPress() {
+    if (page > 0) {
+      setPage(page - 1);
+    } else if (sectionIndex > 0) {
+      setSectionIndex(sectionIndex - 1);
+      setPage(allSections[sectionIndex - 1].length - 1);
+    } else {
+      navigation.goBack();
+    }
+  }
 
   return (
-    <BasicLayout
-      title={"QuestionnaireScreen"}
-      sections={questionnaireSections}
-      renderItem={renderItem}
-      navigateTo={overviewScreenRoute}
+    <BasicLayoutProgressbar
+      title={sectionTitles[sectionIndex]}
+      currentStep={sectionIndex}
+      sections={currentSection}
+      renderItem={renderQuestionItem}
+      onNextButtonPress={onNextButtonPress}
+      onBackButtonPress={onBackButtonPress}
     />
   );
 }
