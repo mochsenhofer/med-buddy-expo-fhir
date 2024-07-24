@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import BasicLayoutProgressBar from "../components/common/BasicLayoutProgressbar";
-import renderQuestionItem from "../utils/renderQuestionItem";
+import renderQuestionnaireItem from "../utils/renderQuestionnaireItem";
 import useQuestionnaireData from "../hooks/useQuestionnaireData";
 import { useNavigation } from "@react-navigation/native";
 import { overviewScreenRoute } from "../navigation/Navigation";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { Text } from "react-native-paper";
 
 export default function QuestionnaireScreen() {
   const navigation = useNavigation();
@@ -14,10 +15,23 @@ export default function QuestionnaireScreen() {
   const {
     informationSections,
     sectionWithLinkIdQuestionnaire,
+    questionnaireSections,
     consentSections,
   } = useQuestionnaireData();
   const [page, setPage] = useState(0);
-  const [sections, setSections] = useState(informationSections);
+  const [sectionIndex, setSectionIndex] = useState(0);
+
+  const allSections = [
+    informationSections,
+    questionnaireSections,
+    [{ title: "Overview", data: [{}] }],
+    consentSections,
+  ];
+
+  const sectionTitles = ["Information", "Questionnaire", "Overview", "Consent"];
+
+  const sections = allSections[sectionIndex];
+  const currentSection = sections[page];
 
   function findQuestionnaireSectionTitle(linkId) {
     return sectionWithLinkIdQuestionnaire.item.find(
@@ -25,59 +39,15 @@ export default function QuestionnaireScreen() {
     ).text;
   }
 
-  function findItemByLinkId(linkId) {
-    for (const item of sectionWithLinkIdQuestionnaire.item) {
-      if (item.linkId === linkId) {
-        return item;
-      }
-      if (item.item) {
-        const found = findItemByLinkId(linkId, item.item);
-        if (found) {
-          return found;
-        }
-      }
-    }
-    return null;
+  function renderOverviewItem(item) {
+    return <Text>Hallo</Text>;
   }
-
-  const questionnaireSections = [
-    {
-      title: findQuestionnaireSectionTitle("q.1"),
-      data: [
-        {
-          linkId: "q.1.1",
-          text: findItemByLinkId("q.1.1", sectionWithLinkIdQuestionnaire.item),
-        },
-      ],
-    },
-  ];
-
-  const overviewSections = [
-    {
-      title: "Overview",
-      data: [{}],
-    },
-  ];
-
-  const allSections = [
-    informationSections,
-    questionnaireSections,
-    overviewSections,
-    consentSections,
-  ];
-
-  const sectionTitles = ["Information", "Questionnaire", "Overview", "Consent"];
-
-  const [sectionIndex, setSectionIndex] = useState(0);
-
-  const currentSection = [sections[page]];
 
   function onNextButtonPress() {
     if (page < sections.length - 1) {
       setPage(page + 1);
     } else if (sectionIndex < allSections.length - 1) {
       setSectionIndex(sectionIndex + 1);
-      setSections(allSections[sectionIndex + 1]);
       setPage(0);
     } else {
       navigation.navigate(overviewScreenRoute);
@@ -89,24 +59,27 @@ export default function QuestionnaireScreen() {
       setPage(page - 1);
     } else if (sectionIndex > 0) {
       setSectionIndex(sectionIndex - 1);
-      setSections(allSections[sectionIndex - 1]);
       setPage(allSections[sectionIndex - 1].length - 1);
     } else {
       navigation.goBack();
     }
   }
 
-  function findItemByLinkId(linkId) {}
+  function handleSelect(value, item) {
+    console.log("clicked" + value);
+  }
 
   return (
     <BasicLayoutProgressBar
       title={sectionTitles[sectionIndex]}
-      sections={currentSection}
-      renderItem={renderQuestionItem}
+      sections={[currentSection]}
+      renderItem={({ item }) =>
+        renderQuestionnaireItem({ item, onSelect: handleSelect })
+      }
       onNextButtonPress={onNextButtonPress}
       onBackButtonPress={onBackButtonPress}
       currentStep={sectionIndex}
-      page={page + 1 + "/" + sections.length}
+      page={`${page + 1}/${sections.length}`}
     />
   );
 }
