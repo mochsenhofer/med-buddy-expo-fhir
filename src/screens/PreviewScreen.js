@@ -6,15 +6,17 @@ import {
   videoScreenRoute,
   questionnaireScreenRoute,
 } from "../navigation/Navigation";
+import { useSelector } from "react-redux";
 
 export default function PreviewScreen() {
   const navigation = useNavigation();
+  const registeredPatient = useSelector((state) => state.patient);
   const previewScreenData = [
     {
       title: "Preview",
       data: [
         {
-          text: "Information",
+          text: registeredPatient.name[0].given[0],
           videoTitle: "Video",
           readInfoTitle: "Information",
           onVideoClick: () => navigation.navigate(videoScreenRoute),
