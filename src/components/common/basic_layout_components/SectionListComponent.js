@@ -2,11 +2,15 @@ import React from "react";
 import { KeyboardAvoidingView, StyleSheet, SectionList } from "react-native";
 import renderSectionHeader from "../../../utils/renderSectionHeader";
 
-export default function SectionListComponent({ sections, renderItem }) {
+export default function SectionListComponent({
+  sections,
+  renderItem,
+  behavior,
+}) {
   return (
     <KeyboardAvoidingView
       style={styles.sectionListContainer}
-      behavior="padding"
+      behavior={behavior}
     >
       <SectionList
         style={styles.sectionList}

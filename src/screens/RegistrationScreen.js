@@ -13,6 +13,7 @@ export default function RegistrationScreen() {
       sections={registrationScreenData}
       renderItem={renderQuestionItem}
       navigateTo={previewScreenRoute}
+      behavior={"padding"}
     />
   );
 }

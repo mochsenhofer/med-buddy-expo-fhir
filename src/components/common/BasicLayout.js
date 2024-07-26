@@ -11,11 +11,16 @@ export default function BasicLayout({
   onNextButtonPress,
   onBackButtonPress,
   navigateTo,
+  behavior,
 }) {
   return (
     <View style={styles.container}>
       <Header title={title} />
-      <SectionListComponent sections={sections} renderItem={renderItem} />
+      <SectionListComponent
+        sections={sections}
+        renderItem={renderItem}
+        behavior={behavior}
+      />
       <FooterNavigation
         onNextButtonPress={onNextButtonPress}
         onBackButtonPress={onBackButtonPress}
