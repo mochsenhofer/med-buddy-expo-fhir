@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@benjeau/react-native-draw": "^0.8.3",
     "@joaosousa/react-native-progress-steps": "^0.4.0",
     "@react-navigation/native": "^6.1.18",
     "@react-navigation/native-stack": "^6.10.1",
