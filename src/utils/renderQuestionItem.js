@@ -21,7 +21,6 @@ export default function renderQuestionItem({ item }) {
 const styles = StyleSheet.create({
   text: {
     margin: 5,
-
     fontSize: 20,
   },
 });
