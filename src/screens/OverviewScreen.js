@@ -2,24 +2,15 @@ import React from "react";
 import { Text } from "react-native-paper";
 import BasicLayout from "../components/common/BasicLayout";
 import { consentScreenRoute } from "../navigation/Navigation";
+import { useSelector } from "react-redux";
 
 export default function OverviewScreen() {
+  const updatedQuestionnaireResponse = useSelector(
+    (state) => state.questionnaireResponse
+  );
   const DATA = [
     {
-      title: "Main dishes",
-      data: ["Pizza", "Burger", "Risotto"],
-    },
-    {
-      title: "Sides",
-      data: ["French Fries", "Onion Rings", "Fried Shrimps"],
-    },
-    {
-      title: "Drinks",
-      data: ["Water", "Coke", "Beer"],
-    },
-    {
-      title: "Desserts",
-      data: ["Cheese Cake", "Ice Cream"],
+      data: [JSON.stringify(updatedQuestionnaireResponse, null, 2)],
     },
   ];
 
@@ -27,7 +18,6 @@ export default function OverviewScreen() {
 
   return (
     <BasicLayout
-      title={"OverviewScreen"}
       sections={DATA}
       renderItem={renderItem}
       navigateTo={consentScreenRoute}
