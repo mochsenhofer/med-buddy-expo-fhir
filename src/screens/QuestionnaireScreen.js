@@ -3,9 +3,11 @@ import BasicLayoutProgressbar from "../components/common/BasicLayoutProgressbar"
 import { texts } from "../languages/texts";
 import { overviewScreenRoute } from "../navigation/Navigation";
 import renderQuestionItem from "../utils/renderQuestionItem";
+import renderOverviewItem from "../utils/renderOverviewItem";
 import useQuestionnaireData from "../hooks/useQuestionnaireData";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   updateValueInteger,
   updateValueString,
@@ -27,12 +29,17 @@ export default function QuestionnaireScreen() {
   const questionnaireResponseState = useSelector(
     (state) => state.questionnaireResponse
   );
+  const registeredPatient = useSelector((state) => state.patient);
 
   const sizeRef = useRef(null);
   const weightRef = useRef(null);
 
+  const patientText = texts.en.registrationScreen;
+  const gender = patientText[registeredPatient.gender];
   const questionnaireText = texts.en.questionnaireScreen.questionnaire;
   const consentText = texts.en.questionnaireScreen.consent;
+  const overviewText =
+    texts.en.questionnaireScreen.overview.overviewSectionHeadings;
 
   function getValueByLinkId(type, linkId) {
     function findItemByLinkId(items, linkId) {
@@ -438,11 +445,157 @@ export default function QuestionnaireScreen() {
 
   const overviewSections = [
     {
-      title: "Test",
+      title: overviewText["oSH.1"],
       data: [
         {
-          text: JSON.stringify(questionnaireResponseState, null, 2),
-          type: "display",
+          linkId: "p.1",
+          text: patientText["p.1"],
+          value: registeredPatient.name[0].given[0],
+        },
+        {
+          linkId: "p.2",
+          text: patientText["p.2"],
+          value: registeredPatient.name[0].family,
+        },
+        {
+          linkId: "p.3",
+          text: patientText["p.3"],
+          value: registeredPatient.identifier[0].value,
+        },
+        {
+          linkId: "p.4",
+          text: patientText["p.4"],
+          value: registeredPatient.birthDate,
+        },
+        {
+          linkId: "p.5",
+          text: patientText["p.5"],
+          value: gender,
+        },
+        {
+          linkId: "q.1.1",
+          text: questionnaireText["q.1.1"],
+          value: getValueByLinkId("valueInteger", "q.1.1"),
+        },
+        {
+          linkId: "q.1.2",
+          text: questionnaireText["q.1.2"],
+          value: getValueByLinkId("valueInteger", "q.1.2"),
+        },
+        {
+          linkId: "q.1.3",
+          text: questionnaireText["q.1.3"],
+          value: getValueByLinkId("valueCoding", "q.1.3"),
+        },
+      ],
+    },
+    {
+      title: overviewText["oSH.2"],
+      data: [
+        {
+          linkId: "q.2.1",
+          text: questionnaireText["q.2.1"],
+          value: getValueByLinkId("valueCoding", "q.2.1"),
+        },
+        {
+          linkId: "q.2.2",
+          text: questionnaireText["q.2.2"],
+          value: getValueByLinkId("valueCoding", "q.2.2"),
+        },
+        {
+          linkId: "q.2.3",
+          text: questionnaireText["q.2.3"],
+          value: getValueByLinkId("valueCoding", "q.2.3"),
+        },
+        {
+          linkId: "q.2.4",
+          text: questionnaireText["q.2.4"],
+          value: getValueByLinkId("valueCoding", "q.2.4"),
+        },
+        {
+          linkId: "q.2.5",
+          text: questionnaireText["q.2.5"],
+          value: getValueByLinkId("valueCoding", "q.2.5"),
+        },
+      ],
+    },
+    {
+      title: overviewText["oSH.3"],
+      data: [
+        {
+          linkId: "q.3.1",
+          text: questionnaireText["q.3.1"],
+          value: getValueByLinkId("valueCoding", "q.3.1"),
+        },
+        {
+          linkId: "q.3.2",
+          text: questionnaireText["q.3.2"],
+          value: getValueByLinkId("valueCoding", "q.3.2"),
+        },
+        {
+          linkId: "q.3.3",
+          text: questionnaireText["q.3.3"],
+          value: getValueByLinkId("valueCoding", "q.3.3"),
+        },
+        {
+          linkId: "q.3.4",
+          text: questionnaireText["q.3.4"],
+          value: getValueByLinkId("valueCoding", "q.3.4"),
+        },
+        {
+          linkId: "q.3.5",
+          text: questionnaireText["q.3.5"],
+          value: getValueByLinkId("valueCoding", "q.3.5"),
+        },
+      ],
+    },
+    {
+      title: overviewText["oSH.4"],
+      data: [
+        {
+          linkId: "q.4.1",
+          text: questionnaireText["q.4.1"],
+          value: getValueByLinkId("valueCoding", "q.4.1"),
+        },
+        {
+          linkId: "q.4.2",
+          text: questionnaireText["q.4.2"],
+          value: getValueByLinkId("valueCoding", "q.4.2"),
+        },
+        {
+          linkId: "q.4.3",
+          text: questionnaireText["q.4.3"],
+          value: getValueByLinkId("valueCoding", "q.4.3"),
+        },
+        {
+          linkId: "q.4.4",
+          text: questionnaireText["q.4.4"],
+          value: getValueByLinkId("valueCoding", "q.4.4"),
+        },
+        {
+          linkId: "q.4.5",
+          text: questionnaireText["q.4.5"],
+          value: getValueByLinkId("valueCoding", "q.4.5"),
+        },
+        {
+          linkId: "q.4.6",
+          text: questionnaireText["q.4.6"],
+          value: getValueByLinkId("valueCoding", "q.4.6"),
+        },
+      ],
+    },
+    {
+      title: overviewText["oSH.5"],
+      data: [
+        {
+          linkId: "q.5.1",
+          text: questionnaireText["q.5.1"],
+          value: getValueByLinkId("valueString", "q.5.1"),
+        },
+        {
+          linkId: "q.5.2",
+          text: questionnaireText["q.5.2"],
+          value: getValueByLinkId("valueCoding", "q.5.2"),
         },
       ],
     },
@@ -487,13 +640,6 @@ export default function QuestionnaireScreen() {
   ];
   const sectionTitles = ["Information", "Questionnaire", "Overview", "Consent"];
 
-  function renderOverviewItem({ item }) {
-    return (
-      <View>
-        <Text>{item.text}</Text>
-      </View>
-    );
-  }
   const renderItemFunctions = [
     renderQuestionItem,
     renderQuestionItem,
@@ -502,10 +648,14 @@ export default function QuestionnaireScreen() {
   ];
 
   const sections = allSections[sectionIndex];
-  const currentSection = [sections[page]];
+  const currentSection = sectionIndex === 2 ? sections : [sections[page]];
+  console.log(sectionIndex);
 
   function onNextButtonPress() {
-    if (page < sections.length - 1) {
+    if (sectionIndex === 2) {
+      setSectionIndex(3);
+      setPage(0);
+    } else if (page < sections.length - 1) {
       setPage(page + 1);
     } else if (sectionIndex < allSections.length - 1) {
       setSectionIndex(sectionIndex + 1);
@@ -516,7 +666,9 @@ export default function QuestionnaireScreen() {
   }
 
   function onBackButtonPress() {
-    if (page > 0) {
+    if (sectionIndex === 3) {
+      setSectionIndex(2);
+    } else if (page > 0) {
       setPage(page - 1);
     } else if (sectionIndex > 0) {
       setSectionIndex(sectionIndex - 1);
