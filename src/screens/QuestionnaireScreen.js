@@ -4,6 +4,7 @@ import { texts } from "../languages/texts";
 import { overviewScreenRoute } from "../navigation/Navigation";
 import renderQuestionItem from "../utils/renderQuestionItem";
 import renderOverviewItem from "../utils/renderOverviewItem";
+import renderConsentItem from "../utils/renderConsentItem";
 import useQuestionnaireData from "../hooks/useQuestionnaireData";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
@@ -512,11 +513,6 @@ export default function QuestionnaireScreen() {
           text: questionnaireText["q.2.4"],
           value: getValueByLinkId("valueCoding", "q.2.4"),
         },
-        {
-          linkId: "q.2.5",
-          text: questionnaireText["q.2.5"],
-          value: getValueByLinkId("valueCoding", "q.2.5"),
-        },
       ],
     },
     {
@@ -607,7 +603,7 @@ export default function QuestionnaireScreen() {
         {
           linkId: "c.1.1",
           text: consentText["c.1.1"],
-          value: "",
+          value: getValueByLinkId("valueCoding", "c.1.1"),
           type: "choice",
           onSelect: (value) => console.log(value),
           answerOption: [
@@ -644,12 +640,13 @@ export default function QuestionnaireScreen() {
     renderQuestionItem,
     renderQuestionItem,
     renderOverviewItem,
-    renderQuestionItem,
+    renderConsentItem,
   ];
 
   const sections = allSections[sectionIndex];
   const currentSection = sectionIndex === 2 ? sections : [sections[page]];
-  console.log(sectionIndex);
+  console.log("sectionIndex" + sectionIndex);
+  console.log("page" + page);
 
   function onNextButtonPress() {
     if (sectionIndex === 2) {
