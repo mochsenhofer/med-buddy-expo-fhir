@@ -34,6 +34,7 @@ export default function QuestionnaireScreen() {
 
   const sizeRef = useRef(null);
   const weightRef = useRef(null);
+  const canvasRef = useRef(null);
 
   const patientText = texts.en.registrationScreen;
   const gender = patientText[registeredPatient.gender];
@@ -605,7 +606,8 @@ export default function QuestionnaireScreen() {
           text: consentText["c.1.1"],
           value: getValueByLinkId("valueCoding", "c.1.1"),
           type: "choice",
-          onSelect: (value) => console.log(value),
+          onSelect: (value) =>
+            dispatch(updateValueCoding({ linkId: "c.1.1", value })),
           answerOption: [
             { valueCoding: { code: "Y", display: questionnaireText["q.yes"] } },
             { valueCoding: { code: "N", display: questionnaireText["q.no"] } },
@@ -621,8 +623,9 @@ export default function QuestionnaireScreen() {
           text: consentText["c.2.1"],
           value: "",
           type: "string",
-          onChangeText: (text) => console.log(text),
-          autoFocus: true,
+          ref: canvasRef,
+          clear: () => canvasRef.current?.clear(),
+          save: () => handleSaveSignature(),
         },
       ],
     },
@@ -658,8 +661,15 @@ export default function QuestionnaireScreen() {
       setSectionIndex(sectionIndex + 1);
       setPage(0);
     } else {
+      handleSaveSignature();
+
       navigation.navigate(overviewScreenRoute);
     }
+  }
+
+  function handleSaveSignature() {
+    const signature = canvasRef.current?.getSvg();
+    dispatch(updateValueString({ linkId: "c.2.1", value: signature }));
   }
 
   function onBackButtonPress() {
