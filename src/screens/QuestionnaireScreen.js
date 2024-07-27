@@ -612,6 +612,7 @@ export default function QuestionnaireScreen() {
             { valueCoding: { code: "Y", display: questionnaireText["q.yes"] } },
             { valueCoding: { code: "N", display: questionnaireText["q.no"] } },
           ],
+          error: false,
         },
       ],
     },
@@ -637,7 +638,7 @@ export default function QuestionnaireScreen() {
     overviewSections,
     consentSections,
   ];
-  const sectionTitles = ["Information", "Questionnaire", "Overview", "Consent"];
+  const sectionTitles = ["", "", "Overview", ""];
 
   const renderItemFunctions = [
     renderQuestionItem,
@@ -673,13 +674,15 @@ export default function QuestionnaireScreen() {
   }
 
   function onBackButtonPress() {
-    if (sectionIndex === 3) {
-      setSectionIndex(2);
+    if (sectionIndex === 2) {
+      setSectionIndex(sectionIndex - 1);
+      setPage(allSections[1].length - 1);
     } else if (page > 0) {
       setPage(page - 1);
     } else if (sectionIndex > 0) {
-      setSectionIndex(sectionIndex - 1);
-      setPage(allSections[sectionIndex - 1].length - 1);
+      const previousSectionIndex = sectionIndex - 1;
+      setSectionIndex(previousSectionIndex);
+      setPage(allSections[previousSectionIndex].length - 1);
     } else {
       navigation.goBack();
     }
