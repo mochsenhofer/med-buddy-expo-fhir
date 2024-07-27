@@ -7,7 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function RegistrationScreen() {
   const navigation = useNavigation();
-  const { registrationScreenData, text, validateAllFields } =
+  const { registrationScreenData, validateAllFields } =
     useRegistrationScreenData();
 
   function handleNextButtonPressed() {
@@ -19,7 +19,6 @@ export default function RegistrationScreen() {
 
   return (
     <BasicLayout
-      title={text.title}
       sections={registrationScreenData}
       renderItem={renderQuestionItem}
       onNextButtonPress={handleNextButtonPressed}
