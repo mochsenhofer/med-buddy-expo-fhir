@@ -1,24 +1,26 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import BasicLayoutNoFooterNavigation from "../components/common/BasicLayoutNoFooterNavigation";
-import renderPreviewScreenItem from "../utils/renderPreviewScreenItem";
-import { useNavigation } from "@react-navigation/native";
+import useLanguage from "../hooks/useLanguage";
+import { texts } from "../languages/texts";
 import {
-  videoScreenRoute,
   questionnaireScreenRoute,
+  videoScreenRoute,
 } from "../navigation/Navigation";
-import { useSelector } from "react-redux";
+import renderPreviewScreenItem from "../utils/renderPreviewScreenItem";
 
 export default function PreviewScreen() {
   const navigation = useNavigation();
-  const registeredPatient = useSelector((state) => state.patient);
+  const language = useLanguage();
+  const previewText = texts[language].previewScreen;
   const previewScreenData = [
     {
-      title: "Preview",
+      title: previewText.title,
       data: [
         {
-          text: registeredPatient.name[0].given[0],
-          videoTitle: "Video",
-          readInfoTitle: "Information",
+          text: previewText.description,
+          videoTitle: previewText.watchVideo,
+          readInfoTitle: previewText.readInformation,
           onVideoClick: () => navigation.navigate(videoScreenRoute),
           onReadInfoClick: () => navigation.navigate(questionnaireScreenRoute),
         },
@@ -28,7 +30,6 @@ export default function PreviewScreen() {
 
   return (
     <BasicLayoutNoFooterNavigation
-      title={"Preview Screen"}
       sections={previewScreenData}
       renderItem={renderPreviewScreenItem}
       navigateTo={questionnaireScreenRoute}
