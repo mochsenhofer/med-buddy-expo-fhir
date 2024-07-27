@@ -14,6 +14,7 @@ export default function renderUserInput(item) {
     case "choice":
       return (
         <RadioButtonsComponent
+          item={item}
           options={item.answerOption}
           onSelect={item.onSelect}
           currentValue={item.value}
