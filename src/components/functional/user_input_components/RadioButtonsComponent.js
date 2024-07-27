@@ -4,6 +4,8 @@ import { FlatList } from "react-native";
 import { useTheme } from "react-native-paper";
 import { useSelector } from "react-redux";
 import { texts } from "../../../languages/texts";
+import ErrorMessage from "./ErrorMessage";
+import { it } from "react-native-paper-dates";
 
 function RadioButton({ text, selected, onSelect }) {
   const theme = useTheme();
@@ -20,7 +22,12 @@ function RadioButton({ text, selected, onSelect }) {
   );
 }
 
-export default function RadioButtons({ options, onSelect, currentValue }) {
+export default function RadioButtons({
+  item,
+  options,
+  onSelect,
+  currentValue,
+}) {
   const language = useSelector(
     (state) => state.patient.communication[0].language.coding[0].code
   );
@@ -37,24 +44,27 @@ export default function RadioButtons({ options, onSelect, currentValue }) {
   }, [currentValue]);
 
   return (
-    <FlatList
-      style={styles.radioButtonFlatList}
-      data={options}
-      numColumns={3}
-      keyExtractor={(item) => item.linkId}
-      renderItem={({ item }) => {
-        if (item.valueCoding.code === "ASKU") {
-          item.valueCoding.display = text["q.idk"];
-        }
-        return (
-          <RadioButton
-            text={item.valueCoding.display}
-            selected={selected === item.valueCoding.code}
-            onSelect={() => handleSelect(item.valueCoding.code)}
-          />
-        );
-      }}
-    />
+    <>
+      <FlatList
+        style={styles.radioButtonFlatList}
+        data={options}
+        numColumns={3}
+        keyExtractor={(item) => item.linkId}
+        renderItem={({ item }) => {
+          if (item.valueCoding.code === "ASKU") {
+            item.valueCoding.display = text["q.idk"];
+          }
+          return (
+            <RadioButton
+              text={item.valueCoding.display}
+              selected={selected === item.valueCoding.code}
+              onSelect={() => handleSelect(item.valueCoding.code)}
+            />
+          );
+        }}
+      />
+      {item.error && <ErrorMessage message={item.errorMessage} />}
+    </>
   );
 }
 
