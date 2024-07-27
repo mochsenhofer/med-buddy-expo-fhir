@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import useLanguage from "./useLanguage";
 import { texts } from "../languages/texts";
 import {
   updateValueInteger,
@@ -12,11 +13,12 @@ const useQuestionnaireSections = () => {
   const questionnaireResponseState = useSelector(
     (state) => state.questionnaireResponse
   );
+  const language = useLanguage();
 
   const sizeRef = useRef(null);
   const weightRef = useRef(null);
 
-  const questionnaireText = texts.en.questionnaireScreen.questionnaire;
+  const questionnaireText = texts[language].questionnaireScreen.questionnaire;
 
   function getValueByLinkId(type, linkId) {
     function findItemByLinkId(items, linkId) {
