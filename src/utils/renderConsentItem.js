@@ -23,7 +23,7 @@ export default function renderConsentItem({ item }) {
         <Canvas
           ref={item.ref}
           style={styles.signaturePad}
-          width={500}
+          width={800}
           height={250}
           roundPoints={true}
         />
