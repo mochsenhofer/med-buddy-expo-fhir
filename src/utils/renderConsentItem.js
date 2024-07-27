@@ -4,6 +4,7 @@ import { p } from "../theme/constants";
 import { Canvas } from "@benjeau/react-native-draw";
 import RadioButtons from "../components/functional/user_input_components/RadioButtonsComponent";
 import { StyleSheet } from "react-native";
+import ErrorMessage from "../components/functional/user_input_components/ErrorMessage";
 
 export default function renderConsentItem({ item }) {
   return (
@@ -13,6 +14,7 @@ export default function renderConsentItem({ item }) {
       </Text>
       {item.type === "choice" ? (
         <RadioButtons
+          item={item}
           options={item.answerOption}
           onSelect={item.onSelect}
           currentValue={item.value}
@@ -26,6 +28,7 @@ export default function renderConsentItem({ item }) {
           roundPoints={true}
         />
       )}
+      {item.error && <ErrorMessage message={item.error} />}
     </>
   );
 }
