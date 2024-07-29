@@ -180,6 +180,7 @@ export default function QuestionnaireScreen() {
       renderItem={renderItemFunctions[sectionIndex]}
       onNextButtonPress={onNextButtonPress}
       onBackButtonPress={onBackButtonPress}
+      page={sectionIndex === 2 ? null : `${page + 1}/${sections.length}`}
     />
   );
 }
