@@ -94,6 +94,7 @@ export const texts = {
         "q.no": "No",
         "q.unknown": "asked but unknown",
         "q.idk": "I don't know",
+        "q.error": "Please answer all the questions",
       },
       overview: {
         overviewSectionHeadings: {
