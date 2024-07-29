@@ -99,6 +99,11 @@ const useQuestionnaireSections = () => {
             },
           ],
         },
+        {
+          linkId: "q.1.error",
+          text: questionnaireText["q.error"],
+          type: "error",
+        },
       ],
     },
     {
@@ -176,6 +181,11 @@ const useQuestionnaireSections = () => {
               },
             },
           ],
+        },
+        {
+          linkId: "q.2.error",
+          text: questionnaireText["q.error"],
+          type: "error",
         },
       ],
     },
@@ -272,6 +282,11 @@ const useQuestionnaireSections = () => {
               },
             },
           ],
+        },
+        {
+          linkId: "q.2.error",
+          text: questionnaireText["q.error"],
+          type: "error",
         },
       ],
     },
@@ -386,6 +401,11 @@ const useQuestionnaireSections = () => {
             },
           ],
         },
+        {
+          linkId: "q.2.error",
+          text: questionnaireText["q.error"],
+          type: "error",
+        },
       ],
     },
     {
@@ -417,6 +437,11 @@ const useQuestionnaireSections = () => {
               },
             },
           ],
+        },
+        {
+          linkId: "q.5.error",
+          text: questionnaireText["q.error"],
+          type: "error",
         },
       ],
     },
