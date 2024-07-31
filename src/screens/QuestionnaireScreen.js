@@ -21,7 +21,6 @@ import {
   updateQuestionnaireId,
   updateAuthor,
 } from "../store/questionnaireResponseReducer";
-import { View, Text } from "react-native";
 
 export default function QuestionnaireScreen() {
   const navigation = useNavigation();
@@ -122,7 +121,6 @@ export default function QuestionnaireScreen() {
     overviewSections,
     consentSections,
   ];
-  const sectionTitles = ["", "", "Overview", ""];
 
   const renderItemFunctions = [
     renderQuestionItem,
@@ -133,8 +131,6 @@ export default function QuestionnaireScreen() {
 
   const sections = allSections[sectionIndex];
   const currentSection = sectionIndex === 2 ? sections : [sections[page]];
-  console.log("sectionIndex" + sectionIndex);
-  console.log("page" + page);
 
   async function onNextButtonPress() {
     switch (sectionIndex) {
