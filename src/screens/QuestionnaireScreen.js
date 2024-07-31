@@ -136,19 +136,39 @@ export default function QuestionnaireScreen() {
   console.log("sectionIndex" + sectionIndex);
   console.log("page" + page);
 
-    if (sectionIndex === 2) {
-      setSectionIndex(3);
-      setPage(0);
-    } else if (page < sections.length - 1) {
-      setPage(page + 1);
-    } else if (sectionIndex < allSections.length - 1) {
-      setSectionIndex(sectionIndex + 1);
-      setPage(0);
-    } else {
-      handleSaveSignature();
+  async function onNextButtonPress() {
+    switch (sectionIndex) {
+      case 0:
+        if (page < informationSections.length - 1) {
+          setPage(page + 1);
+        } else {
+          setSectionIndex(sectionIndex + 1);
+          setPage(0);
+        }
+        break;
+      case 1:
+        if (page < questionnaireSections.length - 1) {
+          // add validation for questionnaireSections here
+          setPage(page + 1);
+        } else {
+          setSectionIndex(sectionIndex + 1);
+          setPage(0);
+        }
+        break;
+      case 2:
+        setSectionIndex(sectionIndex + 1);
+        setPage(0);
+        break;
+      case 3:
+        if (page < consentSections.length - 1) {
+          setPage(page + 1);
+        } else {
+          navigation.navigate(overviewScreenRoute);
+        }
+        break;
 
-      navigation.navigate(overviewScreenRoute);
-
+      default:
+        break;
     }
   }
 
@@ -158,16 +178,36 @@ export default function QuestionnaireScreen() {
   }
 
   function onBackButtonPress() {
-      setSectionIndex(sectionIndex - 1);
-      setPage(allSections[1].length - 1);
-    } else if (page > 0) {
-      setPage(page - 1);
-    } else if (sectionIndex > 0) {
-      const previousSectionIndex = sectionIndex - 1;
-      setSectionIndex(previousSectionIndex);
-      setPage(allSections[previousSectionIndex].length - 1);
-    } else {
-      navigation.goBack();
+    switch (sectionIndex) {
+      case 0:
+        if (page === 0) {
+          navigation.goBack();
+        } else {
+          setPage(page - 1);
+        }
+        break;
+      case 1:
+        if (page === 0) {
+          setSectionIndex(sectionIndex - 1);
+          setPage(informationSections.length - 1);
+        } else {
+          setPage(page - 1);
+        }
+        break;
+      case 2:
+        setSectionIndex(sectionIndex - 1);
+        setPage(questionnaireSections.length - 1);
+        break;
+      case 3:
+        if (page === 0) {
+          setSectionIndex(sectionIndex - 1);
+          setPage(0);
+        } else {
+          setPage(page - 1);
+        }
+        break;
+      default:
+        break;
     }
   }
 
