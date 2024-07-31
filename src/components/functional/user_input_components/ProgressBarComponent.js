@@ -5,9 +5,12 @@ import ProgressSteps, {
   Content,
 } from "@joaosousa/react-native-progress-steps";
 import { medBuddyBlue } from "../../../theme/colors";
-import { marginScreenBorderComponents } from "../../../theme/constants";
+import useLanguage from "../../../hooks/useLanguage";
+import { texts } from "../../../languages/texts";
 
 export default function ProgressBarComponent({ currentStep }) {
+  const language = useLanguage();
+  const progressBarText = texts[language].questionnaireScreen.progressBar;
   return (
     <View style={styles.container}>
       <ProgressSteps
@@ -17,28 +20,28 @@ export default function ProgressBarComponent({ currentStep }) {
           {
             title: (
               <Title>
-                <Text>Information</Text>
+                <Text>{progressBarText.information}</Text>
               </Title>
             ),
           },
           {
             title: (
               <Title>
-                <Text>Questionnaire</Text>
+                <Text>{progressBarText.questionnaire}</Text>
               </Title>
             ),
           },
           {
             title: (
               <Title>
-                <Text>Overview</Text>
+                <Text>{progressBarText.overview}</Text>
               </Title>
             ),
           },
           {
             title: (
               <Title>
-                <Text>Consent</Text>
+                <Text>{progressBarText.consent}</Text>
               </Title>
             ),
           },
