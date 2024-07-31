@@ -1,19 +1,16 @@
 import React from "react";
 import BasicLayout from "../components/common/BasicLayout";
 import useRegistrationScreenData from "../hooks/useRegistrationScreenData";
-import { previewScreenRoute } from "../navigation/Navigation";
 import renderQuestionItem from "../utils/renderQuestionItem";
-import { useNavigation } from "@react-navigation/native";
 
 export default function RegistrationScreen() {
-  const navigation = useNavigation();
-  const { registrationScreenData, validateAllFields } =
+  const { registrationScreenData, validateAllFields, sendPatientData } =
     useRegistrationScreenData();
 
-  function handleNextButtonPressed() {
+  async function handleNextButtonPressed() {
     const isValid = validateAllFields();
     if (isValid) {
-      navigation.navigate(previewScreenRoute);
+      sendPatientData();
     }
   }
 
