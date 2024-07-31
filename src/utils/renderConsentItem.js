@@ -20,15 +20,18 @@ export default function renderConsentItem({ item }) {
           currentValue={item.value}
         />
       ) : (
-        <Canvas
-          ref={item.ref}
-          style={styles.signaturePad}
-          width={800}
-          height={250}
-          roundPoints={true}
-        />
+        <>
+          <Canvas
+            ref={item.ref}
+            style={styles.signaturePad}
+            width={800}
+            height={250}
+            roundPoints={true}
+            onPathsChange={item.onPathsChange}
+          />
+          {item.error && <ErrorMessage message={item.errorMessage} />}
+        </>
       )}
-      {item.error && <ErrorMessage message={item.error} />}
     </>
   );
 }
