@@ -68,7 +68,9 @@ const useQuestionnaireSections = () => {
           type: "integer",
           maxLength: 3,
           onChangeText: (text) =>
-            dispatch(updateValueInteger({ linkId: "q.1.1", value: text })),
+            dispatch(
+              updateValueInteger({ linkId: "q.1.1", value: parseInt(text) })
+            ),
           onSubmitEditing: () => weightRef.current.focus(),
           autoFocus: true,
           ref: sizeRef,
@@ -80,7 +82,9 @@ const useQuestionnaireSections = () => {
           type: "integer",
           maxLength: 3,
           onChangeText: (text) =>
-            dispatch(updateValueInteger({ linkId: "q.1.2", value: text })),
+            dispatch(
+              updateValueInteger({ linkId: "q.1.2", value: parseInt(text) })
+            ),
           ref: weightRef,
         },
         ...(registeredPatientGender !== "male"
