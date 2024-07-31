@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Button } from "react-native-paper";
 import { FlatList } from "react-native";
 import { useTheme } from "react-native-paper";
-import { useSelector } from "react-redux";
 import { texts } from "../../../languages/texts";
 import ErrorMessage from "./ErrorMessage";
-import { it } from "react-native-paper-dates";
+import useLanguage from "../../../hooks/useLanguage";
 
 function RadioButton({ text, selected, onSelect }) {
   const theme = useTheme();
@@ -28,10 +27,8 @@ export default function RadioButtons({
   onSelect,
   currentValue,
 }) {
-  const language = useSelector(
-    (state) => state.patient.communication[0].language.coding[0].code
-  );
-  const text = texts.en.questionnaireScreen.questionnaire;
+  const language = useLanguage();
+  const text = texts[language].questionnaireScreen.questionnaire;
   const [selected, setSelected] = useState(currentValue);
 
   function handleSelect(value) {
