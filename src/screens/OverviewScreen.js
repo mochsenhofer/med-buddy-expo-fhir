@@ -1,8 +1,8 @@
 import React from "react";
 import { Text } from "react-native-paper";
 import BasicLayout from "../components/common/BasicLayout";
-import { consentScreenRoute } from "../navigation/Navigation";
 import { useSelector } from "react-redux";
+import { DevSettings } from "react-native";
 
 export default function OverviewScreen() {
   const updatedQuestionnaireResponse = useSelector(
@@ -18,9 +18,10 @@ export default function OverviewScreen() {
 
   return (
     <BasicLayout
+      title="Danke für Ihre Teilnahme!"
       sections={DATA}
       renderItem={renderItem}
-      navigateTo={consentScreenRoute}
+      onNextButtonPress={() => DevSettings.reload()}
     />
   );
 }
