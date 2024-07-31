@@ -14,6 +14,7 @@ const useQuestionnaireSections = () => {
     (state) => state.questionnaireResponse
   );
   const registeredPatientGender = useSelector((state) => state.patient.gender);
+  const diabetes = getValueByLinkId("valueCoding", "q.4.5");
   console.log(registeredPatientGender);
   const language = useLanguage();
 
@@ -407,15 +408,19 @@ const useQuestionnaireSections = () => {
     {
       title: questionnaireText["q.5"],
       data: [
-        {
-          linkId: "q.5.1",
-          text: questionnaireText["q.5.1"],
-          value: getValueByLinkId("valueString", "q.5.1"),
-          type: "string",
-          onChangeText: (text) =>
-            dispatch(updateValueString({ linkId: "q.5.1", value: text })),
-          autoFocus: true,
-        },
+        ...(diabetes !== "N"
+          ? [
+              {
+                linkId: "q.5.1",
+                text: questionnaireText["q.5.1"],
+                value: getValueByLinkId("valueString", "q.5.1"),
+                type: "string",
+                onChangeText: (text) =>
+                  dispatch(updateValueString({ linkId: "q.5.1", value: text })),
+                autoFocus: true,
+              },
+            ]
+          : [dispatch(updateValueString({ linkId: "q.5.1", value: "" }))]),
         {
           linkId: "q.5.2",
           text: questionnaireText["q.5.2"],
