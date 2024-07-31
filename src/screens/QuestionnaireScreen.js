@@ -148,6 +148,7 @@ export default function QuestionnaireScreen() {
       handleSaveSignature();
 
       navigation.navigate(overviewScreenRoute);
+
     }
   }
 
