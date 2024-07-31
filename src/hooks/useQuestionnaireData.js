@@ -1,13 +1,12 @@
 import { texts } from "../languages/texts";
-import { useSelector } from "react-redux";
+import useLanguage from "./useLanguage";
 
 export default function useQuestionnaireData() {
-  const language = useSelector(
-    (state) => state.patient.communication[0].language.coding[0].code
-  );
-  const informationText = texts.en.questionnaireScreen.information; // change en to language
-  const questionnaireText = texts.en.questionnaireScreen.questionnaire;
-  const consentText = texts.en.questionnaireScreen.consent;
+  const language = useLanguage();
+
+  const informationText = texts[language].questionnaireScreen.information; // change en to language
+  const questionnaireText = texts[language].questionnaireScreen.questionnaire;
+  const consentText = texts[language].questionnaireScreen.consent;
 
   const Questionnaire = {
     resourceType: "Questionnaire",
