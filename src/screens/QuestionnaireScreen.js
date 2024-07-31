@@ -136,7 +136,6 @@ export default function QuestionnaireScreen() {
   console.log("sectionIndex" + sectionIndex);
   console.log("page" + page);
 
-  function onNextButtonPress() {
     if (sectionIndex === 2) {
       setSectionIndex(3);
       setPage(0);
@@ -158,7 +157,6 @@ export default function QuestionnaireScreen() {
   }
 
   function onBackButtonPress() {
-    if (sectionIndex === 2) {
       setSectionIndex(sectionIndex - 1);
       setPage(allSections[1].length - 1);
     } else if (page > 0) {
@@ -174,12 +172,12 @@ export default function QuestionnaireScreen() {
 
   return (
     <BasicLayoutProgressbar
-      title={sectionTitles[sectionIndex]}
       currentStep={sectionIndex}
       sections={currentSection}
       renderItem={renderItemFunctions[sectionIndex]}
       onNextButtonPress={onNextButtonPress}
       onBackButtonPress={onBackButtonPress}
+      page={sectionIndex === 2 ? null : `${page + 1}/${sections.length}`}
     />
   );
 }
