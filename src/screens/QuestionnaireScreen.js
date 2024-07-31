@@ -10,6 +10,7 @@ import useQuestionnaireSections from "../hooks/useQuestionnaireSections";
 import useOverviewSections from "../hooks/useOverviewSections";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
+import { Alert } from "react-native";
 
 import {
   updateValueInteger,
@@ -21,12 +22,16 @@ import {
   updateQuestionnaireId,
   updateAuthor,
 } from "../store/questionnaireResponseReducer";
+import useLanguage from "../hooks/useLanguage";
 
 export default function QuestionnaireScreen() {
   const navigation = useNavigation();
+  const language = useLanguage();
   const [page, setPage] = useState(0);
   const [sectionIndex, setSectionIndex] = useState(0);
-  const { informationSections } = useQuestionnaireData();
+  const [c11Error, setC11Error] = useState(false);
+  const [c21Error, setC21Error] = useState(false);
+  const { informationSections, Questionnaire } = useQuestionnaireData();
   const questionnaireSections = useQuestionnaireSections();
   const overviewSections = useOverviewSections();
   const dispatch = useDispatch();
@@ -35,16 +40,21 @@ export default function QuestionnaireScreen() {
   );
   const registeredPatient = useSelector((state) => state.patient);
 
-  const sizeRef = useRef(null);
-  const weightRef = useRef(null);
   const canvasRef = useRef(null);
 
-  const patientText = texts.en.registrationScreen;
-  const gender = patientText[registeredPatient.gender];
-  const questionnaireText = texts.en.questionnaireScreen.questionnaire;
-  const consentText = texts.en.questionnaireScreen.consent;
-  const overviewText =
-    texts.en.questionnaireScreen.overview.overviewSectionHeadings;
+  function uploadQuestionnaireResponse() {
+    Alert.alert("Alert Title", "My Alert Msg", [
+      {
+        text: "Cancel",
+        onPress: () => console.log("Cancel Pressed"),
+        style: "cancel",
+      },
+      { text: "OK", onPress: () => navigation.navigate(overviewScreenRoute) },
+    ]);
+  }
+
+  const questionnaireText = texts[language].questionnaireScreen.questionnaire;
+  const consentText = texts[language].questionnaireScreen.consent;
 
   function getValueByLinkId(type, linkId) {
     function findItemByLinkId(items, linkId) {
@@ -89,13 +99,16 @@ export default function QuestionnaireScreen() {
           text: consentText["c.1.1"],
           value: getValueByLinkId("valueCoding", "c.1.1"),
           type: "choice",
-          onSelect: (value) =>
-            dispatch(updateValueCoding({ linkId: "c.1.1", value })),
+          onSelect: (value) => {
+            dispatch(updateValueCoding({ linkId: "c.1.1", value }));
+            setC11Error(false); // Reset error state on value change
+          },
           answerOption: [
             { valueCoding: { code: "Y", display: questionnaireText["q.yes"] } },
             { valueCoding: { code: "N", display: questionnaireText["q.no"] } },
           ],
-          error: false,
+          error: c11Error,
+          errorMessage: consentText.errors["c.1.1"],
         },
       ],
     },
@@ -105,11 +118,13 @@ export default function QuestionnaireScreen() {
         {
           linkId: "c.2.1",
           text: consentText["c.2.1"],
-          value: "",
           type: "string",
           ref: canvasRef,
           clear: () => canvasRef.current?.clear(),
           save: () => handleSaveSignature(),
+          onPathsChange: () => setC21Error(false),
+          error: c21Error,
+          errorMessage: consentText.errors["c.2.1"],
         },
       ],
     },
@@ -132,7 +147,7 @@ export default function QuestionnaireScreen() {
   const sections = allSections[sectionIndex];
   const currentSection = sectionIndex === 2 ? sections : [sections[page]];
 
-  async function onNextButtonPress() {
+  function onNextButtonPress() {
     switch (sectionIndex) {
       case 0:
         if (page < informationSections.length - 1) {
@@ -144,7 +159,6 @@ export default function QuestionnaireScreen() {
         break;
       case 1:
         if (page < questionnaireSections.length - 1) {
-          // add validation for questionnaireSections here
           setPage(page + 1);
         } else {
           setSectionIndex(sectionIndex + 1);
@@ -157,10 +171,19 @@ export default function QuestionnaireScreen() {
         break;
       case 3:
         if (page < consentSections.length - 1) {
-          setPage(page + 1);
+          // Validation for c.1.1
+          const valueC11 = getValueByLinkId("valueCoding", "c.1.1");
+          if (valueC11 !== "Y") {
+            setC11Error(true);
+          } else {
+            setPage(page + 1);
+          }
         } else {
-          navigation.navigate(overviewScreenRoute);
+          handleSaveSignature();
+          uploadQuestionnaireResponse();
+          console.log("Questionnaire Response", questionnaireResponseState);
         }
+
         break;
 
       default:
@@ -168,9 +191,13 @@ export default function QuestionnaireScreen() {
     }
   }
 
-  function handleSaveSignature() {
-    const signature = canvasRef.current?.getSvg();
+  async function handleSaveSignature() {
+    const signature = await canvasRef.current?.getSvg();
     dispatch(updateValueString({ linkId: "c.2.1", value: signature }));
+    dispatch(updateValueString({ linkId: "c.2.1", value: signature }));
+    dispatch(updatePatient(registeredPatient));
+    dispatch(updateQuestionnaire(Questionnaire));
+    dispatch(updateQuestionnaireResponseStatus("completed"));
   }
 
   function onBackButtonPress() {
