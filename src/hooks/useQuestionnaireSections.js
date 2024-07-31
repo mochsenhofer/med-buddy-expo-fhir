@@ -13,6 +13,8 @@ const useQuestionnaireSections = () => {
   const questionnaireResponseState = useSelector(
     (state) => state.questionnaireResponse
   );
+  const registeredPatientGender = useSelector((state) => state.patient.gender);
+  console.log(registeredPatientGender);
   const language = useLanguage();
 
   const sizeRef = useRef(null);
@@ -81,24 +83,38 @@ const useQuestionnaireSections = () => {
             dispatch(updateValueInteger({ linkId: "q.1.2", value: text })),
           ref: weightRef,
         },
-        {
-          linkId: "q.1.3",
-          text: questionnaireText["q.1.3"],
-          value: getValueByLinkId("valueCoding", "q.1.3"),
-          type: "choice",
-          onSelect: (value) =>
-            dispatch(updateValueCoding({ linkId: "q.1.3", value })),
-          answerOption: [
-            { valueCoding: { code: "Y", display: questionnaireText["q.yes"] } },
-            { valueCoding: { code: "N", display: questionnaireText["q.no"] } },
-            {
-              valueCoding: {
-                code: "ASKU",
-                display: questionnaireText["q.unknown"],
+        ...(registeredPatientGender !== "male"
+          ? [
+              {
+                linkId: "q.1.3",
+                text: questionnaireText["q.1.3"],
+                value: getValueByLinkId("valueCoding", "q.1.3"),
+                type: "choice",
+                onSelect: (value) =>
+                  dispatch(updateValueCoding({ linkId: "q.1.3", value })),
+                answerOption: [
+                  {
+                    valueCoding: {
+                      code: "Y",
+                      display: questionnaireText["q.yes"],
+                    },
+                  },
+                  {
+                    valueCoding: {
+                      code: "N",
+                      display: questionnaireText["q.no"],
+                    },
+                  },
+                  {
+                    valueCoding: {
+                      code: "ASKU",
+                      display: questionnaireText["q.unknown"],
+                    },
+                  },
+                ],
               },
-            },
-          ],
-        },
+            ]
+          : [dispatch(updateValueCoding({ linkId: "q.1.3", value: "N" }))]),
       ],
     },
     {
