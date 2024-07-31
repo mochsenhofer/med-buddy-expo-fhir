@@ -15,7 +15,6 @@ const useQuestionnaireSections = () => {
   );
   const registeredPatientGender = useSelector((state) => state.patient.gender);
   const diabetes = getValueByLinkId("valueCoding", "q.4.5");
-  console.log(registeredPatientGender);
   const language = useLanguage();
 
   const sizeRef = useRef(null);
