@@ -10,6 +10,8 @@ import useQuestionnaireSections from "../hooks/useQuestionnaireSections";
 import useOverviewSections from "../hooks/useOverviewSections";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
+import { FIREBASE_DB } from "../firebase/firebase";
+import { push, ref, set } from "firebase/database";
 import { Alert } from "react-native";
 
 import {
@@ -19,8 +21,6 @@ import {
   updatePatient,
   updateQuestionnaire,
   updateQuestionnaireResponseStatus,
-  updateQuestionnaireId,
-  updateAuthor,
 } from "../store/questionnaireResponseReducer";
 import useLanguage from "../hooks/useLanguage";
 
@@ -49,8 +49,29 @@ export default function QuestionnaireScreen() {
         onPress: () => console.log("Cancel Pressed"),
         style: "cancel",
       },
-      { text: "OK", onPress: () => navigation.navigate(overviewScreenRoute) },
+      { text: "OK", onPress: () => uploadCompletedQuestionnaire() },
     ]);
+  }
+
+  async function uploadCompletedQuestionnaire() {
+    try {
+      const db = FIREBASE_DB;
+      const questionnaireResponseRef = ref(db, "questionnaireResponses");
+      const newQuestionnaireResponseRef = push(questionnaireResponseRef);
+
+      await set(newQuestionnaireResponseRef, {
+        ...questionnaireResponseState,
+        id: newQuestionnaireResponseRef.key,
+        questionnaire: language,
+      });
+
+      console.log("Data uploaded successfully");
+    } catch (error) {
+      console.error("Error adding document: ", error.message);
+      Alert.alert("Upload Error", "Failed to upload data. Please try again.");
+    } finally {
+      navigation.navigate(overviewScreenRoute);
+    }
   }
 
   const questionnaireText = texts[language].questionnaireScreen.questionnaire;
@@ -193,7 +214,6 @@ export default function QuestionnaireScreen() {
 
   async function handleSaveSignature() {
     const signature = await canvasRef.current?.getSvg();
-    dispatch(updateValueString({ linkId: "c.2.1", value: signature }));
     dispatch(updateValueString({ linkId: "c.2.1", value: signature }));
     dispatch(updatePatient(registeredPatient));
     dispatch(updateQuestionnaire(Questionnaire));
