@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { texts } from "../languages/texts";
 import useQuestionnaireData from "./useQuestionnaireData";
 import useQuestionnaireSections from "./useQuestionnaireSections";
+import useLanguage from "./useLanguage";
 
 export default function useOverviewSections() {
   const questionnaireResponseState = useSelector(
@@ -10,11 +11,13 @@ export default function useOverviewSections() {
   );
   const registeredPatient = useSelector((state) => state.patient);
 
-  const patientText = texts.en.registrationScreen;
+  const language = useLanguage();
+
+  const patientText = texts[language].registrationScreen;
   const gender = patientText[registeredPatient.gender];
-  const questionnaireText = texts.en.questionnaireScreen.questionnaire;
+  const questionnaireText = texts[language].questionnaireScreen.questionnaire;
   const overviewText =
-    texts.en.questionnaireScreen.overview.overviewSectionHeadings;
+    texts[language].questionnaireScreen.overview.overviewSectionHeadings;
 
   function getValueByLinkId(type, linkId) {
     function findItemByLinkId(items, linkId) {
@@ -42,7 +45,14 @@ export default function useOverviewSections() {
         case "valueString":
           return answer.valueString;
         case "valueCoding":
-          return answer.valueCoding.code;
+          switch (answer.valueCoding.code) {
+            case "ASKU":
+              return questionnaireText["q.idk"];
+            case "Y":
+              return questionnaireText["q.yes"];
+            case "N":
+              return questionnaireText["q.no"];
+          }
         default:
           return null;
       }
