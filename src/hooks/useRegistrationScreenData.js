@@ -6,11 +6,18 @@ import {
   updateInsuranceNumber,
   updateBirthDate,
   updateGender,
+  updatePatientId,
 } from "../store/patientReducer";
+import { updateAuthor } from "../store/questionnaireResponseReducer";
+import { useNavigation } from "@react-navigation/native";
+import { previewScreenRoute } from "../navigation/Navigation";
 import useLanguage from "./useLanguage";
 import { texts } from "../languages/texts";
-
+import { push, ref as fRef, set } from "firebase/database";
+import { FIREBASE_DB } from "../firebase/firebase";
+import { id } from "react-native-paper-dates";
 const useRegistrationScreenData = () => {
+  const navigation = useNavigation();
   const registeredPatient = useSelector((state) => state.patient);
   const language = useLanguage();
   const dispatch = useDispatch();
@@ -26,6 +33,25 @@ const useRegistrationScreenData = () => {
     birthDateError: false,
     genderError: false,
   });
+
+  async function sendPatientData() {
+    try {
+      const db = FIREBASE_DB;
+
+      const patientRef = fRef(db, "patients/");
+
+      const newPatientRef = push(patientRef);
+
+      dispatch(updatePatientId(newPatientRef.key));
+      dispatch(updateAuthor(newPatientRef.key));
+
+      await set(newPatientRef, { ...registeredPatient, id: newPatientRef.key });
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    } finally {
+      navigation.navigate(previewScreenRoute);
+    }
+  }
 
   function validateField(field) {
     const errors = { ...formErrors };
@@ -151,7 +177,7 @@ const useRegistrationScreenData = () => {
     },
   ];
 
-  return { registrationScreenData, text, validateAllFields };
+  return { registrationScreenData, text, validateAllFields, sendPatientData };
 };
 
 export default useRegistrationScreenData;
