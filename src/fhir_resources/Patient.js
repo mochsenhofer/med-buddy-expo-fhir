@@ -1,8 +1,8 @@
 export const Patient = {
   resourceType: "Patient",
   id: "",
-  gender: "other",
-  birthDate: "1995-08-08",
+  gender: "",
+  birthDate: "",
   identifier: [
     {
       use: "usual",
@@ -15,13 +15,13 @@ export const Patient = {
         ],
       },
       system: "urn:oid:1.2.36.146.595.217.0.1",
-      value: "1234567890",
+      value: "", //Sozialversicherungsnummer
     },
   ],
   name: [
     {
-      family: "Kickl",
-      given: ["Herbert"],
+      family: "",
+      given: [""],
     },
   ],
   communication: [
@@ -30,10 +30,27 @@ export const Patient = {
         coding: [
           {
             system: "urn:ietf:bcp:47",
-            code: "en",
+            code: "tr",
           },
         ],
       },
     },
   ],
 };
+
+/*
+
+de - german
+en - english
+fr - french
+hr - croatian
+pl - polish
+
+not in the list:
+
+tr - turkish
+sq - albanian
+ro - romanian
+bs - bosnian
+
+*/
