@@ -1,8 +1,8 @@
 export const Patient = {
   resourceType: "Patient",
   id: "",
-  gender: "",
-  birthDate: "",
+  gender: "other",
+  birthDate: "1995-08-08",
   identifier: [
     {
       use: "usual",
@@ -15,13 +15,13 @@ export const Patient = {
         ],
       },
       system: "urn:oid:1.2.36.146.595.217.0.1",
-      value: "",
+      value: "1234567890",
     },
   ],
   name: [
     {
-      family: "",
-      given: [""],
+      family: "Kickl",
+      given: ["Herbert"],
     },
   ],
   communication: [
