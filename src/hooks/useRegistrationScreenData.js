@@ -17,7 +17,7 @@ const useRegistrationScreenData = () => {
   const lastNameRef = useRef(null);
   const insuranceNumberRef = useRef(null);
   const dobRef = useRef(null);
-  const text = texts.en.registrationScreen;
+  const text = texts[language].registrationScreen;
 
   const [formErrors, setFormErrors] = useState({
     givenNameError: false,
