@@ -42,38 +42,6 @@ export default function QuestionnaireScreen() {
 
   const canvasRef = useRef(null);
 
-  function uploadQuestionnaireResponse() {
-    Alert.alert("Alert Title", "My Alert Msg", [
-      {
-        text: "Cancel",
-        onPress: () => console.log("Cancel Pressed"),
-        style: "cancel",
-      },
-      { text: "OK", onPress: () => uploadCompletedQuestionnaire() },
-    ]);
-  }
-
-  async function uploadCompletedQuestionnaire() {
-    try {
-      const db = FIREBASE_DB;
-      const questionnaireResponseRef = ref(db, "questionnaireResponses");
-      const newQuestionnaireResponseRef = push(questionnaireResponseRef);
-
-      await set(newQuestionnaireResponseRef, {
-        ...questionnaireResponseState,
-        id: newQuestionnaireResponseRef.key,
-        questionnaire: language,
-      });
-
-      console.log("Data uploaded successfully");
-    } catch (error) {
-      console.error("Error adding document: ", error.message);
-      Alert.alert("Upload Error", "Failed to upload data. Please try again.");
-    } finally {
-      navigation.navigate(overviewScreenRoute);
-    }
-  }
-
   const questionnaireText = texts[language].questionnaireScreen.questionnaire;
   const consentText = texts[language].questionnaireScreen.consent;
 
@@ -201,8 +169,7 @@ export default function QuestionnaireScreen() {
           }
         } else {
           handleSaveSignature();
-          uploadQuestionnaireResponse();
-          console.log("Questionnaire Response", questionnaireResponseState);
+          navigation.navigate(overviewScreenRoute);
         }
 
         break;
