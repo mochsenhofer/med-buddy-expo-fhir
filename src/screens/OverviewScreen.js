@@ -30,7 +30,6 @@ export default function OverviewScreen() {
         ...updatedQuestionnaireResponse,
         id: newQuestionnaireResponseRef.key,
         questionnaire: language,
-        hello: "world",
       });
 
       console.log("Data uploaded successfully");
