@@ -15,7 +15,6 @@ import useLanguage from "./useLanguage";
 import { texts } from "../languages/texts";
 import { push, ref as fRef, set } from "firebase/database";
 import { FIREBASE_DB } from "../firebase/firebase";
-import { id } from "react-native-paper-dates";
 const useRegistrationScreenData = () => {
   const navigation = useNavigation();
   const registeredPatient = useSelector((state) => state.patient);
