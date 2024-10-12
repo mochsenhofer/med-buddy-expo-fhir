@@ -29,7 +29,7 @@ export default function OverviewScreen() {
       await set(newQuestionnaireResponseRef, {
         ...updatedQuestionnaireResponse,
         id: newQuestionnaireResponseRef.key,
-        questionnaire: language,
+        questionnaire: "#" + language,
       });
 
       console.log("Data uploaded successfully");
