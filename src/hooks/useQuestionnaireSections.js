@@ -423,7 +423,7 @@ const useQuestionnaireSections = () => {
                 autoFocus: true,
               },
             ]
-          : [dispatch(updateValueString({ linkId: "q.5.1", value: "" }))]),
+          : [dispatch(updateValueString({ linkId: "q.5.1", value: "-" }))]),
         {
           linkId: "q.5.2",
           text: questionnaireText["q.5.2"],
