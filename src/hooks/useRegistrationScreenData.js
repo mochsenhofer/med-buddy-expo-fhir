@@ -42,7 +42,7 @@ const useRegistrationScreenData = () => {
       const newPatientRef = push(patientRef);
 
       dispatch(updatePatientId(newPatientRef.key));
-      dispatch(updateAuthor(newPatientRef.key));
+      dispatch(updateAuthor("#" + newPatientRef.key));
 
       await set(newPatientRef, { ...registeredPatient, id: newPatientRef.key });
     } catch (error) {
