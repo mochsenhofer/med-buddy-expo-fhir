@@ -106,7 +106,7 @@ export const texts = {
       },
       consent: {
         "c.1": "Consent",
-        "c.1.1": "The patient agrees to the examination: ",
+        "c.1.1": "The patient agrees to the examination:",
         "c.2": "Signature",
         "c.2.1":
           "By signing, I confirm that I have read and understood the text in this form. I have answered the questions to the best of my knowledge and belief. In a personal talk, the risks were explained to me and my additional questions were answered satisfactorily. I agree that the suggested examination should be carried out",
