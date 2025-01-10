@@ -23,7 +23,7 @@ Install the Expo Go app on your tablet:
 ### Clone the Repository
 Open your terminal or command prompt and run:
 
-    git clone https://github.com/your-username/your-repository.git
+    git clone https://github.com/mochsenhofer/med-buddy-expo-fhir
 
 ### Navigate to the Project Directory
 
