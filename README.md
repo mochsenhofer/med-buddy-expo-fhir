@@ -1,6 +1,6 @@
 # med-buddy-expo-fhir
 
-##Test the App on a Tablet with Expo Go
+## Test the App on a Tablet with Expo Go
 
 Follow these steps to test this project on a tablet using the Expo Go app.
 Prerequisites
